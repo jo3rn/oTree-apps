@@ -1,0 +1,30 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block styles %}
+    <link href='{% static "devilsTask/css/coinGrid.css" %}' rel="stylesheet" />
+{% endblock %}
+
+{% block content %}
+
+    <div id="coinWrapper" class="selectionWrapper">
+    </div>
+
+    {% next_button %}
+
+{% endblock %}
+
+{% block scripts %}
+    <script>
+        window.onload = addCoins({{ Constants.num_coins }});
+
+        function addCoins(number) {
+            for (let i = 0; i < number; i++) {
+                let img = document.createElement("img");
+                img.src = '{% static 'devilsTask/img/firstCoin.png' %}';
+                img.classList.add('coin');
+                document.getElementById("coinWrapper").appendChild(img);
+            }
+        }
+    </script>
+{% endblock %}
