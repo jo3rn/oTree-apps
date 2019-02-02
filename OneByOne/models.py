@@ -4,10 +4,11 @@ from otree.api import (
 )
 
 
-author = 'Your name here'
+author = 'jo3rn'
 
 doc = """
-Your app description
+A player turns a coin. If the other side is also a coin, he can turn another coin or end the game. If the other side 
+is the devil however he looses the game.
 """
 
 
@@ -15,6 +16,7 @@ class Constants(BaseConstants):
     name_in_url = 'OneByOne'
     players_per_group = None
     num_rounds = 1
+    num_coins = 10
 
 
 class Subsession(BaseSubsession):
@@ -26,4 +28,4 @@ class Group(BaseGroup):
 
 
 class Player(BasePlayer):
-    pass
+    collected_coins = models.IntegerField()
