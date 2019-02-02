@@ -1,0 +1,12 @@
+.selectionWrapper {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-gap: 10px;
+}
+
+.coin {
+    width: 5vw;
+    padding: 5px;
+    align-self: center;
+    justify-self: center;
+}
