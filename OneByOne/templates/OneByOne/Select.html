@@ -59,8 +59,8 @@
                 addCoinListeners();
             }
 
-            showElement(btnCollect);
             if (roundNumber < {{ Constants.num_rounds }}) {
+                showElement(btnCollect);
                 roundNumber += 1;
                 roundNumberField.innerHTML = roundNumber;
                 btnCollect.addEventListener("click", collectPoints);
