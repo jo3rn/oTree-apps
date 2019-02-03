@@ -1,12 +1,62 @@
-.selectionWrapper {
+.outerGrid {
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    grid-gap: 10px;
+    grid-template-columns: 2.5fr 2.5fr;
+    grid-template-rows: 1fr 1fr;
 }
 
-.coin {
-    width: 5vw;
+.outerGrid > .selectionWrapper {
+    display: grid;
+    grid-column-start: 1;
+    grid-column-end: 3;
+    grid-row-start: 1;
+    grid-row-end: 2;
+    grid-template-columns: repeat(5, 1fr);
+    border: 1px black solid;
+    margin-bottom: 1vw;
+}
+
+.selectionWrapper > .coin {
     padding: 5px;
+    max-height: 100%;
+    max-width: 100%;
+    border: 1px black solid;
+}
+
+.outerGrid > .collectPoints {
+    grid-column-start: 1;
+    grid-column-end: 2;
+    grid-row-start: 2;
+    grid-row-end: 3;
+    justify-self: start;
+    border: 1px greenyellow solid;
+}
+
+.outerGrid > .newRound {
+    grid-column-start: 2;
+    grid-column-end: 3;
+    grid-row-start: 2;
+    grid-row-end: 3;
+    justify-self: end;
+    border: 1px indigo solid;
+}
+
+.buttonBoth {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    min-width: 10vw;
+    text-align: center;
     align-self: center;
-    justify-self: center;
+}
+
+.pointGrid {
+    border: 1px solid;
+}
+
+.point {
+    float:left;
+    border-radius: 50%;
+    width: 15%;
+    padding-bottom: 15%; /* = width for a 1:1 aspect ratio */
+    margin: 5px;
+    background-color: red;
 }

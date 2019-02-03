@@ -7,8 +7,26 @@
 
 {% block content %}
 
-    <div id="coinWrapper" class="selectionWrapper">
+    <div class="container">
+        <div class="row">
+            <div class="col-8">
+                <div class="outerGrid">
+                    <div id="coinWrapper" class="selectionWrapper"></div>
+                    <div id="btnCollect" class="collectPoints buttonBoth">Punkte sammeln</div>
+                    <div id="btnNewRound" class="newRound buttonBoth">Neue Runde</div>
+                </div>
+            </div>
+
+            <div class="col-4">
+                <div id="pointWrapper" class="pointGrid">
+                    <p>Gewonnene Punkte</p>
+                </div>
+            </div>
+        </div>
     </div>
+
+
+
 
     {% next_button %}
 
@@ -16,15 +34,77 @@
 
 {% block scripts %}
     <script>
-        window.onload = addCoins({{ Constants.num_coins }});
+        window.onload = resetField;
 
-        function addCoins(number) {
-            for (let i = 0; i < number; i++) {
+        let pointsToAdd;
+        let randomDevil;
+
+        function resetField() {
+            // random number between 0 and num_coins
+            randomDevil = Math.floor(Math.random() * {{ Constants.num_coins }});
+            pointsToAdd = 0;
+            console.log("random Devil: " + randomDevil);
+            removeAllChildren(document.getElementById("coinWrapper"));
+            addCoins();
+            document.getElementById("btnCollect").addEventListener("click", collectPoints);
+            document.getElementById("btnNewRound").addEventListener("click", resetField);
+        }
+
+        function removeAllChildren(node) {
+            while (node.firstChild) {
+                console.log("Remove first child");
+                node.removeChild(node.firstChild);
+            }
+        }
+
+        function addCoins() {
+            let coinGrid = document.getElementById("coinWrapper");
+            for (let i = 0; i < {{ Constants.num_coins }}; i++) {
                 let img = document.createElement("img");
                 img.src = '{% static 'devilsTask/img/firstCoin.png' %}';
                 img.classList.add('coin');
-                document.getElementById("coinWrapper").appendChild(img);
+                coinGrid.appendChild(img);
+                if (i === randomDevil) {
+                    img.addEventListener("click", revealDevil);
+                } else {
+                    img.addEventListener("click", revealSecondCoin);
+                }
             }
         }
+
+        function revealSecondCoin() {
+            pointsToAdd += 1;
+            console.log("points to add: " + pointsToAdd);
+            this.src = '{% static 'devilsTask/img/secondCoin.png' %}';
+            this.style.backgroundColor = "#90EE90";
+            this.removeEventListener("click", revealSecondCoin);
+        }
+
+        function revealDevil() {
+            pointsToAdd = 0;
+            console.log("points to add: " + pointsToAdd);
+            this.src = '{% static 'devilsTask/img/devil.jpg' %}';
+            removeCoinEventListeners();
+        }
+
+        function removeCoinEventListeners() {
+            let coinImages = document.getElementsByClassName("coin");
+            for (let i = 0; i < coinImages.length; i++) {
+                coinImages[i].removeEventListener("click", revealSecondCoin, false);
+                coinImages[i].removeEventListener("click", revealDevil, false);
+            }
+        }
+
+        function collectPoints() {
+            removeCoinEventListeners();
+            let pointGrid = document.getElementById("pointWrapper");
+            for (let i = 0; i < pointsToAdd; i++) {
+                let point = document.createElement("div");
+                point.classList.add("point");
+                pointGrid.appendChild(point);
+            }
+            this.removeEventListener("click", collectPoints);
+        }
+
     </script>
 {% endblock %}
