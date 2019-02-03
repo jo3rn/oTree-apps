@@ -9,7 +9,7 @@
 
     <div class="container">
         <div class="row">
-            <div class="col-8">
+            <div class="col-9">
                 <div class="outerGrid">
                     <div id="coinWrapper" class="selectionWrapper"></div>
                     <div id="btnCollect" class="collectPoints buttonBoth">Punkte sammeln</div>
@@ -17,15 +17,13 @@
                 </div>
             </div>
 
-            <div class="col-4">
+            <div class="col-3">
+                <p>Runde: <span id="roundNumber"></span></p>
                 <p>Gewonnene Punkte</p>
-                <div id="pointWrapper" class="pointGrid">
-                </div>
+                <div id="pointWrapper" class="pointGrid"></div>
             </div>
         </div>
     </div>
-
-
 
 
     {% next_button %}
@@ -33,41 +31,63 @@
 {% endblock %}
 
 {% block scripts %}
+    <script src="{% static "devilsTask/js/select.js" %}"></script>
     <script>
         window.onload = resetField;
 
+        let roundNumber = 0;
         let pointsToAdd;
         let randomDevil;
+        const btnCollect = document.getElementById("btnCollect");
+        const btnNewRound = document.getElementById("btnNewRound");
+        const coinGrid = document.getElementById("coinWrapper");
+        const roundNumberField = document.getElementById("roundNumber");
 
         function resetField() {
             // random number between 0 and num_coins
             randomDevil = Math.floor(Math.random() * {{ Constants.num_coins }});
             pointsToAdd = 0;
-            console.log("random Devil: " + randomDevil);
-            removeAllChildren(document.getElementById("coinWrapper"));
-            addCoins();
-            document.getElementById("btnCollect").addEventListener("click", collectPoints);
-            document.getElementById("btnNewRound").addEventListener("click", resetField);
-        }
 
-        function removeAllChildren(node) {
-            while (node.firstChild) {
-                console.log("Remove first child");
-                node.removeChild(node.firstChild);
+            console.log("random Devil: " + randomDevil);
+            let firstTime = (coinGrid.childNodes.length === 0);
+            if (firstTime) {
+                addCoins();
+            } else {
+                removeCoinEventListeners();
+                addCoinListeners();
             }
+
+            showElement(btnCollect);
+            if (roundNumber < {{ Constants.num_rounds }}) {
+                roundNumber += 1;
+                roundNumberField.innerHTML = roundNumber;
+                btnCollect.addEventListener("click", collectPoints);
+            } else {
+                alert("Spiel zu Ende.");
+            }
+
+            hideElement(btnNewRound);
+            btnNewRound.addEventListener("click", resetField);
         }
 
         function addCoins() {
-            let coinGrid = document.getElementById("coinWrapper");
             for (let i = 0; i < {{ Constants.num_coins }}; i++) {
                 let img = document.createElement("img");
-                img.src = '{% static 'devilsTask/img/firstCoin.png' %}';
                 img.classList.add('coin');
                 coinGrid.appendChild(img);
+                addCoinListeners();
+            }
+        }
+
+        function addCoinListeners() {
+            for (let i = 0; i < coinGrid.childNodes.length; i++) {
+                let coin = coinGrid.childNodes[i];
+                coin.style.backgroundColor = "#FFF";
+                coin.src = '{% static 'devilsTask/img/firstCoin.png' %}';
                 if (i === randomDevil) {
-                    img.addEventListener("click", revealDevil);
+                    coin.addEventListener("click", revealDevil);
                 } else {
-                    img.addEventListener("click", revealSecondCoin);
+                    coin.addEventListener("click", revealSecondCoin);
                 }
             }
         }
@@ -85,25 +105,8 @@
             console.log("points to add: " + pointsToAdd);
             this.src = '{% static 'devilsTask/img/devil.jpg' %}';
             removeCoinEventListeners();
-        }
-
-        function removeCoinEventListeners() {
-            let coinImages = document.getElementsByClassName("coin");
-            for (let i = 0; i < coinImages.length; i++) {
-                coinImages[i].removeEventListener("click", revealSecondCoin, false);
-                coinImages[i].removeEventListener("click", revealDevil, false);
-            }
-        }
-
-        function collectPoints() {
-            removeCoinEventListeners();
-            let pointGrid = document.getElementById("pointWrapper");
-            for (let i = 0; i < pointsToAdd; i++) {
-                let point = document.createElement("div");
-                point.classList.add("point");
-                pointGrid.appendChild(point);
-            }
-            this.removeEventListener("click", collectPoints);
+            showElement(btnNewRound);
+            hideElement(btnCollect);
         }
 
     </script>

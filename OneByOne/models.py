@@ -15,7 +15,7 @@ is the devil however he looses the game.
 class Constants(BaseConstants):
     name_in_url = 'OneByOne'
     players_per_group = None
-    num_rounds = 1
+    num_rounds = 10
     num_coins = 10
 
 

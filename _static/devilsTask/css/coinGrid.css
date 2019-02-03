@@ -41,8 +41,7 @@
 }
 
 .buttonBoth {
-    padding-top: 10px;
-    padding-bottom: 10px;
+    padding: 10px;
     min-width: 10vw;
     text-align: center;
     align-self: center;
