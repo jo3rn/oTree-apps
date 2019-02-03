@@ -19,7 +19,7 @@
 
             <div class="col-3">
                 <p>Runde: <span id="roundNumber"></span></p>
-                <p>Gewonnene Punkte</p>
+                <p>Gewonnene Punkte:  <span id="totalScore"></span></p>
                 <div id="pointWrapper" class="pointGrid"></div>
             </div>
         </div>
@@ -36,12 +36,14 @@
         window.onload = resetField;
 
         let roundNumber = 0;
+        let score = 0;
         let pointsToAdd;
         let randomDevil;
         const btnCollect = document.getElementById("btnCollect");
         const btnNewRound = document.getElementById("btnNewRound");
         const coinGrid = document.getElementById("coinWrapper");
         const roundNumberField = document.getElementById("roundNumber");
+        const scoreField = document.getElementById("totalScore");
 
         function resetField() {
             // random number between 0 and num_coins
@@ -107,6 +109,20 @@
             removeCoinEventListeners();
             showElement(btnNewRound);
             hideElement(btnCollect);
+        }
+
+        function collectPoints() {
+            hideElement(document.getElementById("btnCollect"));
+            removeCoinEventListeners();
+            let pointGrid = document.getElementById("pointWrapper");
+            for (let i = 0; i < pointsToAdd; i++) {
+                let point = document.createElement("div");
+                point.classList.add("point");
+                pointGrid.appendChild(point);
+            }
+            score += pointsToAdd;
+            roundNumberField.innerHTML = score;
+            showElement(document.getElementById("btnNewRound"));
         }
 
     </script>

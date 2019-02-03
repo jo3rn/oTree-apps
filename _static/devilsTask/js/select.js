@@ -6,18 +6,6 @@ function removeCoinEventListeners() {
     }
 }
 
-function collectPoints() {
-    hideElement(document.getElementById("btnCollect"));
-    removeCoinEventListeners();
-    let pointGrid = document.getElementById("pointWrapper");
-    for (let i = 0; i < pointsToAdd; i++) {
-        let point = document.createElement("div");
-        point.classList.add("point");
-        pointGrid.appendChild(point);
-    }
-    showElement(document.getElementById("btnNewRound"));
-}
-
 function hideElement(element) {
     element.style.visibility = "hidden";
 }
