@@ -28,4 +28,7 @@ class Group(BaseGroup):
 
 
 class Player(BasePlayer):
-    collected_coins = models.IntegerField()
+    round_collected_coins = models.IntegerField()
+    round_clicks = models.IntegerField()
+    round_time = models.IntegerField()
+
