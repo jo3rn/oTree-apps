@@ -85,21 +85,21 @@
             for (let i = 0; i < coinGrid.childNodes.length; i++) {
                 let coin = coinGrid.childNodes[i];
                 coin.style.backgroundColor = "#FFF";
-                coin.src = '{% static 'devilsTask/img/firstCoin.png' %}';
+                coin.src = '{% static 'devilsTask/img/questionMark.png' %}';
                 if (i === randomDevil) {
                     coin.addEventListener("click", revealDevil);
                 } else {
-                    coin.addEventListener("click", revealSecondCoin);
+                    coin.addEventListener("click", revealCoin);
                 }
             }
         }
 
-        function revealSecondCoin() {
+        function revealCoin() {
             pointsToAdd += 1;
             console.log("points to add: " + pointsToAdd);
-            this.src = '{% static 'devilsTask/img/secondCoin.png' %}';
+            this.src = '{% static 'devilsTask/img/coin.png' %}';
             this.style.backgroundColor = "#90EE90";
-            this.removeEventListener("click", revealSecondCoin);
+            this.removeEventListener("click", revealCoin);
         }
 
         function revealDevil() {
