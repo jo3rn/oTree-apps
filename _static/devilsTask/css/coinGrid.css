@@ -18,6 +18,7 @@
 }
 
 .newRound {
+    visibility: hidden;
     border: 1px indigo solid;
 }
 

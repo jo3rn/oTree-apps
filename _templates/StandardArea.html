@@ -1,0 +1,37 @@
+{% load staticfiles otree %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-9">
+            <div class="row">
+                <div id="coinWrapper" class="selectionWrapper">
+                    {% for point in num_coins_list %}
+                        <img class="coin" src={% static 'devilsTask/img/questionMark.png' %}/>
+                    {% endfor %}
+                </div>
+
+            </div>
+            <div class="row d-flex justify-content-between">
+                <button id="btnCollect" class="collectPoints buttonBoth otree-next-button">Punkte sammeln</button>
+                <button id="btnNewRound" class="newRound buttonBoth otree-next-button">Neue Runde</button>
+            </div>
+        </div>
+
+        <div class="col-3">
+            <p>Runde {{ round }} von {{ Constants.num_rounds }}</p>
+            <p>Gewonnene Punkte: {{ total_payoff }}</p>
+            <div id="pointWrapper" class="pointGrid">
+                {% for point in total_payoff_list %}
+                    <div class="point"></div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<input type="hidden" name=round_collected_coins id="round_collected_coins" />
+<input type="hidden" name=round_clicks id="round_clicks" />
+<input type="hidden" name=round_time id="round_time" />
+{{ form.round_collected_coins.errors }}
+{{ form.round_clicks.errors }}
+{{ form.round_time.errors }}

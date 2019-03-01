@@ -6,7 +6,7 @@ from otree.api import (
 author = 'jo3rn'
 
 doc = """
-A player turns a coin. If the other side is also a coin, he can turn another coin or end the game. If the other side 
+A player clicks on a question mark. If the other side is a coin, he can click another or end the game. If the other side 
 is the devil however he looses the game.
 """
 
@@ -14,7 +14,7 @@ is the devil however he looses the game.
 class Constants(BaseConstants):
     name_in_url = 'OneByOne'
     players_per_group = None
-    num_rounds = 10
+    num_rounds = 2
     num_coins = 10
 
 

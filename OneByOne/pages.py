@@ -14,7 +14,9 @@ class Select(Page):
     def vars_for_template(self):
         return {
             'round': self.round_number,
-            'total_payoff': self.participant.payoff
+            'total_payoff': self.participant.payoff,
+            'total_payoff_list': range(int(self.participant.payoff)),
+            'num_coins_list': range(Constants.num_coins)
         }
 
     def before_next_page(self):
