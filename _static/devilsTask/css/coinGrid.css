@@ -1,15 +1,6 @@
-.outerGrid {
+.selectionWrapper {
     display: grid;
-    grid-template-columns: 2.5fr 2.5fr;
-    grid-template-rows: 2fr 1fr;
-}
-
-.outerGrid > .selectionWrapper {
-    display: grid;
-    grid-column-start: 1;
-    grid-column-end: 3;
-    grid-row-start: 1;
-    grid-row-end: 2;
+    width: 100%;
     grid-template-columns: repeat(5, 1fr);
     border: 1px black solid;
     margin-bottom: 1vw;
@@ -22,21 +13,11 @@
     border: 1px black solid;
 }
 
-.outerGrid > .collectPoints {
-    grid-column-start: 1;
-    grid-column-end: 2;
-    grid-row-start: 2;
-    grid-row-end: 3;
-    justify-self: start;
+.collectPoints {
     border: 1px greenyellow solid;
 }
 
-.outerGrid > .newRound {
-    grid-column-start: 2;
-    grid-column-end: 3;
-    grid-row-start: 2;
-    grid-row-end: 3;
-    justify-self: end;
+.newRound {
     border: 1px indigo solid;
 }
 
@@ -44,7 +25,6 @@
     padding: 10px;
     min-width: 10vw;
     text-align: center;
-    align-self: center;
 }
 
 .pointGrid {
