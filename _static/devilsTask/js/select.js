@@ -2,8 +2,9 @@ let score = 0;
 let pointsToAdd;
 let randomDevil;
 const startTime = new Date();
-const btnCollect = document.getElementById("btnCollect");
+const btnCollect = document.getElementById("btnCollectCoins");
 const btnNewRound = document.getElementById("btnNewRound");
+const btnCheck = document.getElementById("btnCheckSelection");
 const coinGrid = document.getElementById("coinWrapper");
 const imagesInCoinGrid = coinGrid.querySelectorAll("img");
 const roundCollectedCoins = document.getElementById("round_collected_coins");
@@ -30,7 +31,14 @@ function initializeJs(numberOfCoins, pathToDevil, pathToCoin, oneByOneMode) {
     removeFieldEventListeners();
     addFieldEventListeners();
 
-    showElement(btnCollect);
+    if (isModeOneByOne) {
+        showElement(btnCollect);
+    } else {
+        btnCheck.addEventListener("click", checkSelection);
+        hideElement(btnCollect);
+        showElement(btnCheck);
+    }
+
     btnCollect.addEventListener("click", collectPoints);
     btnNewRound.addEventListener("click", startNewRoundAfterDevil);
 }
@@ -55,6 +63,7 @@ function revealCoin() {
         this.src = pathToCoinImg;
         this.style.backgroundColor = "#90EE90";
     } else {
+        this.classList.add("revealMe");
         this.style.backgroundColor = "#FFC43D";
     }
 }
@@ -74,15 +83,15 @@ function revealDevil() {
 }
 
 function collectPoints() {
-    hideElement(document.getElementById("btnCollect"));
+    hideElement(btnCollect);
     removeFieldEventListeners();
     trackTime();
-    trackClicks();
-
+    
     if (!isDevilClicked) {
         score += pointsToAdd;
     }
 
+    trackClicks();
     roundCollectedCoins.value = score;
 }
 
@@ -90,6 +99,32 @@ function startNewRoundAfterDevil() {
     trackTime();
     roundCollectedCoins.value = 0;
     trackClicks();
+}
+
+function checkSelection() {
+    hideElement(btnCheck);
+    removeFieldEventListeners();
+
+    for (let i = 0; i < imagesInCoinGrid.length; i++) {
+        let coin = imagesInCoinGrid[i];
+        if (coin.classList.contains("revealMe")) {
+            coin.src = pathToCoinImg;
+            if (isDevilClicked) {
+                coin.style.backgroundColor = "#f77474";
+            } else {
+                coin.style.backgroundColor = "#90EE90";
+            }
+        }
+    }
+
+    if (isDevilClicked) {
+        let devil = imagesInCoinGrid[randomDevil];
+        devil.style.backgroundColor = "#FFF";
+        devil.src = pathToDevilImg;
+        showElement(btnNewRound);
+    } else {
+        showElement(btnCollect);
+    }
 }
 
 function trackTime() {

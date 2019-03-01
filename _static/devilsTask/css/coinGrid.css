@@ -13,16 +13,23 @@
     border: 1px black solid;
 }
 
-.collectPoints {
+#btnCollectCoins {
+    visibility: hidden;
     border: 1px greenyellow solid;
 }
 
-.newRound {
+#btnNewRound {
     visibility: hidden;
     border: 1px indigo solid;
 }
 
-.buttonBoth {
+#btnCheckSelection {
+    visibility: hidden;
+    cursor: pointer;
+    border: 1px greenyellow solid;
+}
+
+.buttonGeneral {
     padding: 10px;
     min-width: 10vw;
     text-align: center;
