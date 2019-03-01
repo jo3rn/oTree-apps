@@ -16,7 +16,7 @@ SESSION_CONFIGS = [
         'name': 'Devils_Task',
         'display_name': "Devils Task",
         'num_demo_participants': 1,
-        'app_sequence': ['OneByOne'],
+        'app_sequence': ['OneByOne', 'AllAtOnce'],
     },
 ]
 
