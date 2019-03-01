@@ -12,21 +12,25 @@
             <div class="col-9">
                 <div class="outerGrid">
                     <div id="coinWrapper" class="selectionWrapper"></div>
-                    <div id="btnCollect" class="collectPoints buttonBoth">Punkte sammeln</div>
-                    <div id="btnNewRound" class="newRound buttonBoth">Neue Runde</div>
+                    <button id="btnCollect" class="collectPoints buttonBoth otree-next-button">Punkte sammeln</button>
+                    <button id="btnNewRound" class="newRound buttonBoth otree-next-button">Neue Runde</button>
                 </div>
             </div>
 
             <div class="col-3">
-                <p>Runde: <span id="roundNumber"></span></p>
-                <p>Gewonnene Punkte:  <span id="totalScore"></span></p>
+                <p>Runde: {{ round }}</p>
+                <p>Gewonnene Punkte: {{ total_payoff }}</p>
                 <div id="pointWrapper" class="pointGrid"></div>
             </div>
         </div>
     </div>
 
-
-    {% next_button %}
+    <input type="hidden" name=round_collected_coins id="round_collected_coins" />
+    <input type="hidden" name=round_clicks id="round_clicks" />
+    <input type="hidden" name=round_time id="round_time" />
+    {{ form.round_collected_coins.errors }}
+    {{ form.round_clicks.errors }}
+    {{ form.round_time.errors }}
 
 {% endblock %}
 
@@ -35,17 +39,20 @@
     <script>
         window.onload = resetField;
 
-        let roundNumber = 0;
         let score = 0;
         let pointsToAdd;
         let randomDevil;
+        const startTime = new Date();
         const btnCollect = document.getElementById("btnCollect");
         const btnNewRound = document.getElementById("btnNewRound");
         const coinGrid = document.getElementById("coinWrapper");
-        const roundNumberField = document.getElementById("roundNumber");
-        const scoreField = document.getElementById("totalScore");
+        const roundCollectedCoins = document.getElementById("round_collected_coins");
+        const roundClicks = document.getElementById("round_clicks");
+        const roundTime = document.getElementById("round_time");
 
         function resetField() {
+            drawPoints();
+
             // random number between 0 and num_coins
             randomDevil = Math.floor(Math.random() * {{ Constants.num_coins }});
             pointsToAdd = 0;
@@ -59,17 +66,11 @@
                 addCoinListeners();
             }
 
-            if (roundNumber < {{ Constants.num_rounds }}) {
-                showElement(btnCollect);
-                roundNumber += 1;
-                roundNumberField.innerHTML = roundNumber;
-                btnCollect.addEventListener("click", collectPoints);
-            } else {
-                alert("Spiel zu Ende.");
-            }
+            showElement(btnCollect);
+            btnCollect.addEventListener("click", collectPoints);
 
             hideElement(btnNewRound);
-            btnNewRound.addEventListener("click", resetField);
+            btnNewRound.addEventListener("click", startNewRoundAfterDevil);
         }
 
         function addCoins() {
@@ -114,15 +115,33 @@
         function collectPoints() {
             hideElement(document.getElementById("btnCollect"));
             removeCoinEventListeners();
+            trackTime();
+            score += pointsToAdd;
+            roundCollectedCoins.value = score;
+            trackClicks();
+        }
+
+        function startNewRoundAfterDevil() {
+            trackTime();
+            roundCollectedCoins.value = 0;
+            trackClicks();
+        }
+
+        function drawPoints() {
             let pointGrid = document.getElementById("pointWrapper");
-            for (let i = 0; i < pointsToAdd; i++) {
+            for (let i = 0; i < {{ total_payoff }}; i++) {
                 let point = document.createElement("div");
                 point.classList.add("point");
                 pointGrid.appendChild(point);
             }
-            score += pointsToAdd;
-            scoreField.innerHTML = score;
-            showElement(document.getElementById("btnNewRound"));
+        }
+
+        function trackTime() {
+            roundTime.value = new Date() - startTime;
+        }
+
+        function trackClicks() {
+            roundClicks.value = score;
         }
 
     </script>

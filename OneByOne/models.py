@@ -1,6 +1,5 @@
 from otree.api import (
-    models, widgets, BaseConstants, BaseSubsession, BaseGroup, BasePlayer,
-    Currency as c, currency_range
+    models, widgets, BaseConstants, BaseSubsession, BaseGroup, BasePlayer
 )
 
 
@@ -29,6 +28,7 @@ class Group(BaseGroup):
 
 class Player(BasePlayer):
     round_collected_coins = models.IntegerField()
+    total_collected_coins = models.CurrencyField()
     round_clicks = models.IntegerField()
     round_time = models.IntegerField()
 
