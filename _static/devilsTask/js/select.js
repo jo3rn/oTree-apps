@@ -58,16 +58,24 @@ function addFieldEventListeners() {
 }
 
 function revealCoin() {
-    if (!isDevilClicked) {
-        pointsToAdd += 1;
-    }
-    this.removeEventListener("click", revealCoin);
     if (isModeOneByOne) {
+        this.removeEventListener("click", revealCoin);
         this.src = pathToCoinImg;
         this.style.backgroundColor = "#90EE90";
     } else {
-        this.classList.add("revealMe");
-        this.style.backgroundColor = "#FFC43D";
+        if (!this.classList.contains("revealMe")) {
+            this.classList.add("revealMe");
+        } else {
+            this.classList.remove("revealMe");
+            if (!isDevilClicked) {
+                pointsToAdd -= 1;
+                return;
+            }
+        }
+    }
+
+    if (!isDevilClicked) {
+        pointsToAdd += 1;
     }
 }
 
