@@ -3,7 +3,6 @@ let pointsToAdd;
 let randomDevil;
 const startTime = new Date();
 const btnCollect = document.getElementById("btnCollectCoins");
-const btnNewRound = document.getElementById("btnNewRound");
 const btnCheck = document.getElementById("btnCheckSelection");
 const coinGrid = document.getElementById("coinWrapper");
 const imagesInCoinGrid = coinGrid.querySelectorAll("img");
@@ -14,16 +13,22 @@ const roundTime = document.getElementById("round_time");
 let pathToDevilImg;
 let pathToCoinImg;
 
+let coinAudio;
+let devilAudio;
+
 let isModeOneByOne;
 let isDevilClicked;
 
-function initializeJs(numberOfCoins, pathToDevil, pathToCoin, oneByOneMode) {
+function initializeJs(numberOfCoins, pathToDevil, pathToCoin, pathToCoinAudio, pathToDevilAudio, oneByOneMode) {
     // random number between 0 and num_coins
     randomDevil = Math.floor(Math.random() * numberOfCoins);
     pointsToAdd = 0;
 
     pathToDevilImg = pathToDevil;
     pathToCoinImg = pathToCoin;
+    coinAudio = new Audio(pathToCoinAudio);
+    devilAudio = new Audio(pathToDevilAudio);
+
 
     isModeOneByOne = oneByOneMode;
     isDevilClicked = false;
@@ -32,15 +37,13 @@ function initializeJs(numberOfCoins, pathToDevil, pathToCoin, oneByOneMode) {
     addFieldEventListeners();
 
     if (isModeOneByOne) {
+        btnCollect.addEventListener("click", collectPoints);
         showElement(btnCollect);
     } else {
         btnCheck.addEventListener("click", checkSelection);
         hideElement(btnCollect);
         showElement(btnCheck);
     }
-
-    btnCollect.addEventListener("click", collectPoints);
-    btnNewRound.addEventListener("click", startNewRoundAfterDevil);
 }
 
 function addFieldEventListeners() {
@@ -73,7 +76,7 @@ function revealDevil() {
     if (isModeOneByOne) {
         this.src = pathToDevilImg;
         removeFieldEventListeners();
-        showElement(btnNewRound);
+        startNewRoundAfterDevil();
         hideElement(btnCollect);
     } else {
         this.style.backgroundColor = "#FFC43D";
@@ -83,22 +86,26 @@ function revealDevil() {
 }
 
 function collectPoints() {
+	coinAudio.play();
     hideElement(btnCollect);
     removeFieldEventListeners();
     trackTime();
     
     if (!isDevilClicked) {
-        score += pointsToAdd;
+        score += pointsToAdd
     }
 
     trackClicks();
     roundCollectedCoins.value = score;
+    setTimeout(advanceToNextPage, 2500);
 }
 
 function startNewRoundAfterDevil() {
+    devilAudio.play();
     trackTime();
     roundCollectedCoins.value = 0;
     trackClicks();
+    setTimeout(advanceToNextPage, 2500);
 }
 
 function checkSelection() {
@@ -121,9 +128,9 @@ function checkSelection() {
         let devil = imagesInCoinGrid[randomDevil];
         devil.style.backgroundColor = "#FFF";
         devil.src = pathToDevilImg;
-        showElement(btnNewRound);
+        startNewRoundAfterDevil();
     } else {
-        showElement(btnCollect);
+        collectPoints();
     }
 }
 
@@ -149,4 +156,8 @@ function hideElement(element) {
 
 function showElement(element) {
     element.style.visibility = "visible";
+}
+
+function advanceToNextPage() {
+  document.getElementById("form").submit();
 }

@@ -25,11 +25,11 @@
 
 #btnCheckSelection {
     visibility: hidden;
-    cursor: pointer;
     border: 1px greenyellow solid;
 }
 
 .buttonGeneral {
+    cursor: pointer;
     padding: 10px;
     min-width: 10vw;
     text-align: center;
