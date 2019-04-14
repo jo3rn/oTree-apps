@@ -14,10 +14,16 @@ SESSION_CONFIG_DEFAULTS = {
 SESSION_CONFIGS = [
     {
         'name': 'Devils_Task',
-        'display_name': "Devils Task",
+        'display_name': "Devil's Task",
         'num_demo_participants': 1,
         'app_sequence': ['OneByOne', 'AllAtOnce'],
     },
+    {
+        'name': 'Frog',
+        'display_name': 'Frog Game',
+        'num_demo_participants': 1,
+        'app_sequence': ['Frog'],
+    }
 ]
 
 
@@ -42,3 +48,4 @@ SECRET_KEY = 'sf&a2hg_kj0pq6qheo9h5lpg#448fman8%9a3)%1jv8=v48stb'
 
 # if an app is included in SESSION_CONFIGS, you don't need to list it here
 INSTALLED_APPS = ['otree']
+DEBUG = False
