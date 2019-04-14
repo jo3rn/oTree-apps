@@ -12,10 +12,12 @@ class SelectAll(Page):
     form_fields = ['round_collected_coins', 'round_clicks', 'round_time']
 
     def vars_for_template(self):
+        cumulative_payoff = sum([p.payoff for p in self.player.in_all_rounds()])
+
         return {
             'round': self.round_number,
-            'total_payoff': self.participant.payoff,
-            'total_payoff_list': range(int(self.participant.payoff)),
+            'total_payoff_app': cumulative_payoff,
+            'total_payoff_app_list': range(int(cumulative_payoff)),
             'num_coins_list': range(Constants.num_coins)
         }
 

@@ -1,4 +1,5 @@
 let score = 0;
+let clicks = 0;
 let pointsToAdd;
 let randomDevil;
 const startTime = new Date();
@@ -17,7 +18,7 @@ let coinAudio;
 let devilAudio;
 
 let isModeOneByOne;
-let isDevilClicked;
+let isDevilClicked = false;
 
 function initializeJs(numberOfCoins, pathToDevil, pathToCoin, pathToCoinAudio, pathToDevilAudio, oneByOneMode) {
     // random number between 0 and num_coins
@@ -58,6 +59,7 @@ function addFieldEventListeners() {
 }
 
 function revealCoin() {
+    clicks += 1;
     if (isModeOneByOne) {
         this.removeEventListener("click", revealCoin);
         this.src = pathToCoinImg;
@@ -67,29 +69,29 @@ function revealCoin() {
             this.classList.add("revealMe");
         } else {
             this.classList.remove("revealMe");
-            if (!isDevilClicked) {
-                pointsToAdd -= 1;
-                return;
-            }
+            pointsToAdd -= 1;
+            return;
         }
     }
 
-    if (!isDevilClicked) {
-        pointsToAdd += 1;
-    }
+    pointsToAdd += 1;
 }
 
 function revealDevil() {
-    pointsToAdd = 0;
+    clicks += 1;
     if (isModeOneByOne) {
+        pointsToAdd = 0;
         this.src = pathToDevilImg;
         removeFieldEventListeners();
         startNewRoundAfterDevil();
         hideElement(btnCollect);
     } else {
-        this.style.backgroundColor = "#FFC43D";
-        this.removeEventListener("click", revealDevil);
-        isDevilClicked = true;
+        if (!this.classList.contains("revealMe")) {
+            this.classList.add("revealMe");
+        } else {
+            this.classList.remove("revealMe");
+        }
+        isDevilClicked = !isDevilClicked;
     }
 }
 
@@ -97,23 +99,17 @@ function collectPoints() {
 	coinAudio.play();
     hideElement(btnCollect);
     removeFieldEventListeners();
-    trackTime();
-    
-    if (!isDevilClicked) {
-        score += pointsToAdd
-    }
-
-    trackClicks();
+    trackTimeAndClicks();
+    score += pointsToAdd;
     roundCollectedCoins.value = score;
-    setTimeout(advanceToNextPage, 2500);
+    setTimeout(advanceToNextPage, 2400);
 }
 
 function startNewRoundAfterDevil() {
     devilAudio.play();
-    trackTime();
+    trackTimeAndClicks();
     roundCollectedCoins.value = 0;
-    trackClicks();
-    setTimeout(advanceToNextPage, 2500);
+    setTimeout(advanceToNextPage, 2400);
 }
 
 function checkSelection() {
@@ -142,12 +138,9 @@ function checkSelection() {
     }
 }
 
-function trackTime() {
+function trackTimeAndClicks() {
     roundTime.value = new Date() - startTime;
-}
-
-function trackClicks() {
-    roundClicks.value = score;
+    roundClicks.value = clicks;
 }
 
 function removeFieldEventListeners() {
