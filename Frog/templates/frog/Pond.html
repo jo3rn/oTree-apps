@@ -1,0 +1,22 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block styles %}
+    <link href='{% static "frog/css/pond.css" %}' rel="stylesheet" />
+{% endblock %}
+
+{% block content %}
+
+    <div id="container">
+        <div class="pond"></div>
+        <div id="frog" class="frog"></div>
+    </div>
+
+{% endblock %}
+
+{% block scripts %}
+    <script src="{% static "frog/js/movement.js" %}"></script>
+    <script>
+
+    </script>
+{% endblock %}

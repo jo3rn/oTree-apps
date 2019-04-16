@@ -1,0 +1,30 @@
+#container {
+    width: 80vmin;
+    height: 80vmin;
+    position: relative;
+    margin: auto;
+    border: 2px solid red;
+}
+
+h2, .otree-title, .page-header {
+    display: none !important;
+    margin: 0;
+}
+
+.pond {
+    position: absolute;
+    width: 40vmin;
+    height: 20vmin;
+    background: dodgerblue;
+    border-radius: 30vmin / 15vmin;
+}
+
+.frog {
+    position: absolute;
+    width: 10vmin;
+    height: 10vmin;
+    background-color: lawngreen;
+    border-radius: 2vmin;
+    left: 10vmin;
+    top: 60vmin;
+}

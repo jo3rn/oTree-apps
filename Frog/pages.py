@@ -3,7 +3,7 @@ from ._builtin import Page, WaitPage
 from .models import Constants
 
 
-class MyPage(Page):
+class Pond(Page):
     pass
 
 
@@ -18,7 +18,7 @@ class Results(Page):
 
 
 page_sequence = [
-    MyPage,
+    Pond,
     ResultsWaitPage,
     Results
 ]
