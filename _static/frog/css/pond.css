@@ -20,11 +20,13 @@ h2, .otree-title, .page-header {
 }
 
 .frog {
+    display: block;
     position: absolute;
-    width: 10vmin;
-    height: 10vmin;
+    width: 12vmin;
+    height: 12vmin;
     background-color: lawngreen;
     border-radius: 2vmin;
     left: 10vmin;
     top: 60vmin;
+    transition: all 1s;
 }
