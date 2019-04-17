@@ -17,6 +17,8 @@ h2, .otree-title, .page-header {
     height: 20vmin;
     background: dodgerblue;
     border-radius: 30vmin / 15vmin;
+    left: 50%;
+    transform: translate(-50%, 0);
 }
 
 .frog {
