@@ -32,6 +32,18 @@ h2, .otree-title, .page-header {
     visibility: hidden;
 }
 
+.frogs {
+    position: absolute;
+    left: 1vmin;
+    top: 1vmin;
+}
+
+.round {
+    position: absolute;
+    right: 1vmin;
+    top: 1vmin;
+}
+
 .grid {
     display: grid;
     grid-template-columns: 1fr 1fr;

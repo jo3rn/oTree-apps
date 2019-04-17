@@ -8,6 +8,19 @@
 {% block content %}
 
     <div id="container">
+        <p class="frogs">{{ frogs }}
+            {% if frogs == 1 %}
+                Frosch
+            {% else %}
+                Frösche
+            {% endif %}
+        </p>
+        <p class="round">
+            {% if round < 1 %}
+                Testlauf
+            {% else %}
+                Runde {{ round }}
+            {% endif %}</p>
         <div id="pond" class="pond"></div>
         <div id="frog" class="frog"></div>
     </div>

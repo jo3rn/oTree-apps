@@ -7,7 +7,22 @@ class Pond(Page):
     form_fields = ['frog_success']
 
     def before_next_page(self):
-        self.player.payoff = self.player.frog_success
+        if self.round_number == 0:
+            self.participant.vars["test_frogs"] = 0
+        if self.round_number > Constants.num_test_rounds:
+            self.player.payoff = self.player.frog_success
+        else:
+            self.participant.vars["test_frogs"] += self.player.frog_success
+
+    def vars_for_template(self):
+        if self.round_number <= Constants.num_test_rounds:
+            frogs = self.participant.vars["test_frogs"]
+        else:
+            frogs = self.participant.payoff
+        return {
+            'round': self.round_number - Constants.num_test_rounds,
+            'frogs': frogs,
+        }
 
 
 class SelectGameMode(Page):
