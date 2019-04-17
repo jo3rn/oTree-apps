@@ -8,7 +8,7 @@
 {% block content %}
 
     <div id="container">
-        <div class="pond"></div>
+        <div id="pond" class="pond"></div>
         <div id="frog" class="frog"></div>
     </div>
 
@@ -17,6 +17,14 @@
 {% block scripts %}
     <script src="{% static "frog/js/movement.js" %}"></script>
     <script>
+        window.onload = initialize;
+
+        function initialize() {
+            initializeJs(
+            '{% static 'frog/audio/splash.mp3' %}',
+            '{% static 'frog/audio/quak.mp3' %}',
+            true);
+        }
 
     </script>
 {% endblock %}

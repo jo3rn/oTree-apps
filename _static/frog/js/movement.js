@@ -1,6 +1,6 @@
 const container = document.getElementById('container');
+const pond = document.getElementById('pond');
 const frog = document.getElementById('frog');
-
 
 const containerRect = container.getBoundingClientRect();
 // container is quadratic: length = height = width
@@ -8,8 +8,15 @@ const containerRect = container.getBoundingClientRect();
 const containerLength = containerRect.right - containerRect.left;
 console.log("container length: " + containerLength);
 
+let splashAudio = new Audio();
+let quakAudio = new Audio();
 
 frog.addEventListener('click', getClickPosition, false);
+
+function initializeJs(pathToSplashAudio, pathToQuakAudio) {
+    splashAudio = new Audio(pathToSplashAudio);
+    quakAudio = new Audio(pathToQuakAudio);
+}
 
 function getClickPosition(e) {
     frog.removeEventListener('click', getClickPosition);
@@ -47,4 +54,32 @@ function getClickPosition(e) {
 const moveFrog = function (transformation){
     console.log(transformation);
     frog.style.transform = transformation;
+    setTimeout(checkIfFrogIsInPond, 1400);
 };
+
+function checkIfFrogIsInPond() {
+    const pondRect = pond.getBoundingClientRect();
+    const pondLeft = pondRect.left;
+    const pondRight = pondRect.right;
+    const pondTop = pondRect.top;
+    const pondBottom = pondRect.bottom;
+    const frogRect = frog.getBoundingClientRect();
+    const frogLeft = frogRect.left;
+    const frogRight = frogRect.right;
+    const frogTop = frogRect.top;
+    const frogBottom = frogRect.bottom;
+    const frogCenterX = (frogRight + frogLeft) / 2;
+    const frogCenterY = (frogBottom + frogTop) /2;
+
+    if (frogCenterX <= pondLeft || frogCenterY >= pondBottom || frogCenterX >= pondRight || frogCenterY <= pondTop) {
+        quakAudio.play();
+        console.log("Frog outside pond!");
+        frog.style.backgroundColor = "#F00";
+        frog.style.transform = "rotate(360deg)";
+    } else {
+        splashAudio.play();
+        console.log("Frog jumped in pond!");
+    }
+    frog.style.opacity = "0";
+
+}
