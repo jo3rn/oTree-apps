@@ -14,8 +14,8 @@ const roundTime = document.getElementById("round_time");
 let pathToDevilImg;
 let pathToCoinImg;
 
-let coinAudio;
-let devilAudio;
+let coinAudio = new Audio();
+let devilAudio = new Audio();
 
 let isModeOneByOne;
 let isDevilClicked = false;
