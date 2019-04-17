@@ -10,6 +10,14 @@ class Pond(Page):
         self.player.payoff = self.player.frog_success
 
 
+class SelectGameMode(Page):
+    form_model = 'player'
+    form_fields = ['game_mode']
+
+    def is_displayed(self):
+        return self.round_number == 1
+
+
 class ResultsWaitPage(WaitPage):
     def is_displayed(self):
         return self.round_number == Constants.num_rounds
@@ -25,6 +33,7 @@ class Results(Page):
 
 page_sequence = [
     Pond,
+    SelectGameMode,
     ResultsWaitPage,
     Results
 ]

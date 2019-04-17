@@ -32,3 +32,27 @@ h2, .otree-title, .page-header {
     top: 60vmin;
     transition: all 1s;
 }
+
+.grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    height: 30vh;
+    justify-items: center;
+    margin-top: 5vh;
+}
+
+.pictures{
+    padding: 5vmin;
+    border: 1px solid black;
+    max-height: 30vh;
+}
+
+label > input{ /* HIDE SUBMIT */
+    visibility: hidden; /* Makes input not-clickable */
+    position: absolute; /* Remove input from document flow */
+}
+
+label > input + img{ /* IMAGE STYLES */
+    cursor:pointer;
+    border:8px solid transparent;
+}

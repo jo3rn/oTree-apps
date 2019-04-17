@@ -14,7 +14,8 @@ Your app description
 class Constants(BaseConstants):
     name_in_url = 'Frog'
     players_per_group = None
-    num_rounds = 5
+    num_test_rounds = 5
+    num_rounds = 6  # including test rounds
 
 
 class Subsession(BaseSubsession):
@@ -27,4 +28,5 @@ class Group(BaseGroup):
 
 class Player(BasePlayer):
     frog_success = models.IntegerField()
+    game_mode = models.IntegerField()
     pass

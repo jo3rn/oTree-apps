@@ -1,0 +1,28 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block styles %}
+    <link href='{% static "frog/css/pond.css" %}' rel="stylesheet" />
+{% endblock %}
+
+{% block content %}
+
+    <form>
+    <div  class="grid">
+        <div class="single">
+            <label for="1">
+              <input name="game_mode" type="submit" id="1" value="1"/>
+              <img class="pictures" src="{% static 'frog/img/singleplayer.png' %}">
+            </label>
+        </div>
+
+        <div class="multi">
+            <label for="2">
+              <input name="game_mode" type="submit" id="2" value="2"/>
+              <img class="pictures" src="{% static 'frog/img/multiplayer.png' %}">
+            </label>
+        </div>
+    </div>
+    </form>
+
+{% endblock %}
