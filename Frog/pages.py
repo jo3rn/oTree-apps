@@ -30,7 +30,7 @@ class SelectGameMode(Page):
     form_fields = ['game_mode']
 
     def is_displayed(self):
-        return self.round_number == 1
+        return self.round_number == Constants.num_test_rounds
 
 
 class ResultsWaitPage(WaitPage):

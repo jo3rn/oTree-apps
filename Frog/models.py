@@ -15,7 +15,8 @@ class Constants(BaseConstants):
     name_in_url = 'Frog'
     players_per_group = None
     num_test_rounds = 2
-    num_rounds = 6  # including test rounds
+    num_real_rounds = 4
+    num_rounds = num_test_rounds + num_real_rounds
 
 
 class Subsession(BaseSubsession):
