@@ -1,6 +1,7 @@
 const container = document.getElementById('container');
 const pond = document.getElementById('pond');
 const frog = document.getElementById('frog');
+const frogInPond = document.getElementById('frog_success');
 
 const containerRect = container.getBoundingClientRect();
 // container is quadratic: length = height = width
@@ -73,13 +74,17 @@ function checkIfFrogIsInPond() {
 
     if (frogCenterX <= pondLeft || frogCenterY >= pondBottom || frogCenterX >= pondRight || frogCenterY <= pondTop) {
         quakAudio.play();
-        console.log("Frog outside pond!");
+        frogInPond.value = 0;
         frog.style.backgroundColor = "#F00";
         frog.style.transform = "rotate(360deg)";
     } else {
         splashAudio.play();
-        console.log("Frog jumped in pond!");
+        frogInPond.value = 1;
     }
     frog.style.opacity = "0";
+    setTimeout(advanceToNextPage, 1500);
+}
 
+function advanceToNextPage() {
+  document.getElementById("form").submit();
 }
