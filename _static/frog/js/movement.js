@@ -17,6 +17,23 @@ frog.addEventListener('click', getClickPosition, false);
 function initializeJs(pathToSplashAudio, pathToQuakAudio) {
     splashAudio = new Audio(pathToSplashAudio);
     quakAudio = new Audio(pathToQuakAudio);
+    randomizeFrogPosition();
+}
+
+function randomizeFrogPosition() {
+    // frog is 15% the size of the container
+    const max = Math.floor(containerLength - 0.15 * containerLength);
+    const minX = Math.ceil(containerLength - 0.85 * containerLength);
+    const randomX = Math.floor(Math.random() * (max - minX + 1) + minX);
+
+    // frog should be a decent distance away from the pond
+    const minY = Math.ceil(containerLength - 0.6 * containerLength);
+    const randomY = Math.floor(Math.random() * (max - minY + 1) + minY);
+
+    console.log(randomX, randomY);
+    frog.style.left = randomX.toString() + "px";
+    frog.style.top = randomY.toString() + "px";
+    frog.style.visibility = "visible";
 }
 
 function getClickPosition(e) {

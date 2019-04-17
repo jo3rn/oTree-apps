@@ -28,9 +28,8 @@ h2, .otree-title, .page-header {
     height: 12vmin;
     background-color: lawngreen;
     border-radius: 2vmin;
-    left: 10vmin;
-    top: 60vmin;
     transition: all 1s;
+    visibility: hidden;
 }
 
 .grid {
