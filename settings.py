@@ -21,7 +21,7 @@ SESSION_CONFIGS = [
     {
         'name': 'Frog',
         'display_name': 'Frog Game',
-        'num_demo_participants': 1,
+        'num_demo_participants': 4,
         'app_sequence': ['Frog'],
     }
 ]
