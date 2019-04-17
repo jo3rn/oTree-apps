@@ -2,6 +2,23 @@ from ._builtin import Page, WaitPage
 from .models import Constants
 
 
+class GroupingWaitPage(WaitPage):
+    group_by_arrival_time = True
+
+    def is_displayed(self):
+        return self.round_number == Constants.num_test_rounds + 1
+
+    def get_players_for_group(self, waiting_players):
+        single_players = [p for p in waiting_players if p.participant.vars['game_mode'] == 1]
+        multi_players = [p for p in waiting_players if p.participant.vars['game_mode'] == 2]
+
+        if len(single_players) > 0:
+            return [single_players[0]]
+
+        if len(multi_players) > 1:
+            return [multi_players[0], multi_players[1]]
+
+
 class Pond(Page):
     form_model = 'player'
     form_fields = ['frog_success']
@@ -36,26 +53,12 @@ class SelectGameMode(Page):
         self.participant.vars['game_mode'] = self.player.game_mode
 
 
-class GroupingWaitPage(WaitPage):
-    group_by_arrival_time = True
+class PerceptionGroup(Page):
+    form_model = 'player'
+    form_fields = ['others_will_score']
 
     def is_displayed(self):
-        return self.round_number == Constants.num_test_rounds
-
-    def get_players_for_group(self, waiting_players):
-        print('in get_players_for_group')
-        single_players = [p for p in waiting_players if p.participant.vars['game_mode'] == 1]
-        multi_players = [p for p in waiting_players if p.participant.vars['game_mode'] == 2]
-
-        if len(single_players) > 0:
-            print('create single player group')
-            return [single_players[0]]
-
-        if len(multi_players) > 1:
-            print('create multi player group')
-            return [multi_players[0], multi_players[1]]
-
-        print('not enough players to create a group')
+        return self.round_number == Constants.num_test_rounds and self.participant.vars['game_mode'] == 2
 
 
 class ResultsWaitPage(WaitPage):
@@ -70,11 +73,26 @@ class Results(Page):
     def is_displayed(self):
         return self.round_number == Constants.num_rounds
 
+    def vars_for_template(self):
+        if self.participant.vars['game_mode'] == 1:
+            total = self.participant.payoff
+        else:
+            if self.player.get_opponent().participant.payoff > self.participant.payoff:
+                total = 0
+                self.participant.payoff = 0
+            else:
+                total = self.participant.payoff
+
+        return {
+            'total': total
+        }
+
 
 page_sequence = [
+    GroupingWaitPage,
     Pond,
     SelectGameMode,
-    GroupingWaitPage,
+    PerceptionGroup,
     ResultsWaitPage,
     Results
 ]

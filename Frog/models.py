@@ -31,4 +31,7 @@ class Group(BaseGroup):
 class Player(BasePlayer):
     frog_success = models.IntegerField()
     game_mode = models.IntegerField()
-    pass
+    others_will_score = models.StringField()
+
+    def get_opponent(self):
+        return self.get_others_in_group()[0]

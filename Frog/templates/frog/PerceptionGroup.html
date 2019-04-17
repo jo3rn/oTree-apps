@@ -1,0 +1,28 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block styles %}
+    <link href='{% static "frog/css/pond.css" %}' rel="stylesheet" />
+{% endblock %}
+
+{% block content %}
+
+    <form>
+    <div  class="grid">
+        <div class="others_higher">
+            <label for="higher">
+              <input name="others_will_score" type="submit" id="higher" value="higher"/>
+              <img class="pictures" src="{% static 'frog/img/others.png' %}">
+            </label>
+        </div>
+
+        <div class="others_lower">
+            <label for="lower">
+              <input name="others_will_score" type="submit" id="lower" value="lower"/>
+              <img class="pictures" src="{% static 'frog/img/me.png' %}">
+            </label>
+        </div>
+    </div>
+    </form>
+
+{% endblock %}
