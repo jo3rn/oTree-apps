@@ -80,8 +80,12 @@ class Results(Page):
             if self.player.get_opponent().participant.payoff > self.participant.payoff:
                 total = 0
                 self.participant.payoff = 0
+            elif self.player.get_opponent().participant.payoff == self.participant.payoff:
+                total = 10
+                self.participant.payoff = 10
             else:
-                total = self.participant.payoff
+                total = 20
+                self.participant.payoff = 20
 
         return {
             'total': total
