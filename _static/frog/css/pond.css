@@ -14,10 +14,12 @@ h2, .otree-title, .page-header {
     position: absolute;
     width: 40vmin;
     height: 20vmin;
-    background: dodgerblue;
-    border-radius: 30vmin / 15vmin;
     left: 50%;
     transform: translate(-50%, 0);
+    background-image: url('../img/pond.png');
+    background-size: 100% 100%;
+    background-repeat:no-repeat;
+    background-position: center center;
 }
 
 .frog {
