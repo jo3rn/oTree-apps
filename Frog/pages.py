@@ -2,23 +2,6 @@ from ._builtin import Page, WaitPage
 from .models import Constants
 
 
-class GroupingWaitPage(WaitPage):
-    group_by_arrival_time = True
-
-    def is_displayed(self):
-        return self.round_number == Constants.num_test_rounds + 1
-
-    def get_players_for_group(self, waiting_players):
-        single_players = [p for p in waiting_players if p.participant.vars['game_mode'] == 1]
-        multi_players = [p for p in waiting_players if p.participant.vars['game_mode'] == 2]
-
-        if len(single_players) > 0:
-            return [single_players[0]]
-
-        if len(multi_players) > 1:
-            return [multi_players[0], multi_players[1]]
-
-
 class Pond(Page):
     form_model = 'player'
     form_fields = ['frog_success']
@@ -74,18 +57,23 @@ class Results(Page):
         return self.round_number == Constants.num_rounds
 
     def vars_for_template(self):
+
+        opponent_index = self.participant.vars['opponent_index']
+        opponent_id = self.player.get_opponent_id(opponent_index)
+        opponent = self.group.get_player_by_id(opponent_id)
+
         if self.participant.vars['game_mode'] == 1:
-            total = self.participant.payoff
+            total = int(self.participant.payoff)
         else:
-            if self.player.get_opponent().participant.payoff > self.participant.payoff:
+            if opponent.participant.payoff > self.participant.payoff:
                 total = 0
-                self.participant.payoff = 0
-            elif self.player.get_opponent().participant.payoff == self.participant.payoff:
+            elif opponent.participant.payoff == self.participant.payoff:
                 total = 10
-                self.participant.payoff = 10
             else:
                 total = 20
-                self.participant.payoff = 20
+
+        self.player.opponent_id = opponent_id
+        self.player.final_score = total
 
         return {
             'total': total
@@ -93,7 +81,6 @@ class Results(Page):
 
 
 page_sequence = [
-    GroupingWaitPage,
     Pond,
     SelectGameMode,
     PerceptionGroup,
