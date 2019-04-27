@@ -25,10 +25,14 @@ h2, .otree-title, .page-header {
     position: absolute;
     width: 12vmin;
     height: 12vmin;
-    background-color: lawngreen;
-    border-radius: 2vmin;
+    border-radius: 6vmin;
+    border: 2px solid #74BC18;
     transition: all 1s;
     visibility: hidden;
+    background-image: url('../img/frog.png');
+    background-size: contain;
+    background-repeat:no-repeat;
+    background-position: center center;
 }
 
 .frogs {
