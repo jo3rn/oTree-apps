@@ -13,6 +13,12 @@ SESSION_CONFIG_DEFAULTS = {
 
 SESSION_CONFIGS = [
     {
+        'name': 'Devils_Task_and_Frog',
+        'display_name': "Devil's Task & Frog Game",
+        'num_demo_participants': 4,
+        'app_sequence': ['OneByOne', 'AllAtOnce', 'Frog'],
+    },
+    {
         'name': 'Devils_Task',
         'display_name': "Devil's Task",
         'num_demo_participants': 1,
