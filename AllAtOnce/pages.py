@@ -6,6 +6,14 @@ class Instructions(Page):
     def is_displayed(self):
         return self.round_number == 1
 
+    def vars_for_template(self):
+        return {
+            'round': self.round_number,
+            'total_payoff_app': 0,
+            'total_payoff_app_list': range(0),
+            'num_coins_list': range(Constants.num_coins)
+        }
+
 
 class SelectAll(Page):
     form_model = 'player'

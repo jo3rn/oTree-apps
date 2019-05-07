@@ -39,14 +39,12 @@ function initializeJs(
     const playPromise = devilIntroAudio.play();
 
     playPromise.then(() => {
-        console.log(devilIntroAudio.duration);
         setTimeout(anleitungTaler, devilIntroAudio.duration * 1000 + audioPause)
     })
 }
 
 function anleitungTaler() {
-    const playPromise = anleitungTalerAudio.play();
-    playPromise.then(() => {
+    anleitungTalerAudio.play().then(() => {
         instructionsArea.style.visibility = "visible";
         setTimeout(highlightCoins, anleitungTalerAudio.duration * 1000 - 2000);
         setTimeout(anleitungDevil, anleitungTalerAudio.duration * 1000 + audioPause)

@@ -1,14 +1,32 @@
 {% extends "global/Page.html" %}
 {% load otree static %}
 
-{% block title %}
-    Instructions
+{% block styles %}
+    <link href='{% static "devilsTask/css/coinGrid.css" %}' rel="stylesheet" />
+    <link href='{% static "devilsTask/css/instructions.css" %}' rel="stylesheet" />
 {% endblock %}
 
 {% block content %}
-    coming soon...
-
-    {% next_button %}
+    {% include "DevilsTaskInstructionArea.html" %}
 {% endblock %}
 
+{% block scripts %}
+    <script src="{% static "devilsTask/js/instructionsSimultaneous.js" %}"></script>
+    <script>
+        window.onload = initialize;
 
+        function initialize() {
+            initializeJs(
+                '{% static 'devilsTask/img/coin.png' %}',
+                '{% static 'devilsTask/img/devil.jpg' %}',
+                '{% static 'devilsTask/img/unknown.png' %}',
+                '{% static 'devilsTask/audio/pass-gut-auf.mp3' %}',
+                '{% static 'devilsTask/audio/hinter-den-feldern.mp3' %}',
+                '{% static 'devilsTask/audio/erst-wenn.mp3' %}',
+                '{% static 'devilsTask/audio/wenn-aber-das-teufelchen.mp3' %}',
+                '{% static 'devilsTask/audio/insgesamt-sieben-runden-2.mp3' %}',
+            );
+        }
+
+    </script>
+{% endblock %}
