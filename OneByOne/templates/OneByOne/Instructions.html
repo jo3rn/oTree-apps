@@ -6,10 +6,6 @@
     <link href='{% static "devilsTask/css/instructions.css" %}' rel="stylesheet" />
 {% endblock %}
 
-{% block title %}
-    Instructions
-{% endblock %}
-
 {% block content %}
 
     {% include "DevilsTaskInstructionArea.html" %}
@@ -25,8 +21,14 @@
             initializeJs(
                 '{% static 'devilsTask/img/coin.png' %}',
                 '{% static 'devilsTask/img/devil.jpg' %}',
+                '{% static 'devilsTask/img/unknown.png' %}',
                 '{% static 'devilsTask/audio/devil-intro.mp3' %}',
                 '{% static 'devilsTask/audio/anleitung-taler.mp3' %}',
+                '{% static 'devilsTask/audio/anleitung-teufel.mp3' %}',
+                '{% static 'devilsTask/audio/anleitung-zweiter-teil-3.mp3' %}',
+                '{% static 'devilsTask/audio/sichern-schloss-tippen.mp3' %}',
+                '{% static 'devilsTask/audio/insgesamt-sieben-runden.mp3' %}',
+                '{% static 'devilsTask/audio/jetzt-du.mp3' %}',
             );
         }
 

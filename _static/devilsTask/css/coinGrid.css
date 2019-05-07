@@ -13,11 +13,6 @@
     border: 1px black solid;
 }
 
-#btnCollectCoins {
-    visibility: hidden;
-    border: 1px greenyellow solid;
-}
-
 #btnNewRound {
     visibility: hidden;
     border: 1px indigo solid;
@@ -31,8 +26,13 @@
 .buttonGeneral {
     cursor: pointer;
     padding: 10px;
-    min-width: 10vw;
     text-align: center;
+}
+
+#btnCollectCoins {
+    visibility: hidden;
+    width: 100px;
+    height: 100px;
 }
 
 .pointGrid {
