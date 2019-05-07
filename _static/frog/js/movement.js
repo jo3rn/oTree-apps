@@ -7,7 +7,6 @@ const containerRect = container.getBoundingClientRect();
 // container is quadratic: length = height = width
 // containerLength declares the maximum distance a frog can jump
 const containerLength = containerRect.right - containerRect.left;
-console.log("container length: " + containerLength);
 
 let splashAudio = new Audio();
 let quakAudio = new Audio();

@@ -1,0 +1,39 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block styles %}
+    <link href='{% static "frog/css/pond.css" %}' rel="stylesheet" />
+    <link href='{% static "frog/css/instructions.css" %}' rel="stylesheet" />
+{% endblock %}
+
+{% block content %}
+
+    <div id="container">
+        <div id="pond" class="pond"></div>
+        <div id="frog1" class="frog"></div>
+        <div id="frog2" class="frog"></div>
+        <div id="frog3" class="frog"></div>
+        <div id="frog4" class="frog"></div>
+        <img id="finger1" class="finger" src='{% static 'frog/img/index_finger.png' %}' />
+        <img id="finger2" class="finger" src='{% static 'frog/img/index_finger.png' %}' />
+        <img id="finger3" class="finger" src='{% static 'frog/img/index_finger.png' %}' />
+        <img id="finger4" class="finger" src='{% static 'frog/img/index_finger.png' %}' />
+    </div>
+
+{% endblock %}
+
+{% block scripts %}
+    <script src="{% static "frog/js/instructions.js" %}"></script>
+    <script>
+        window.onload = initialize;
+
+        function initialize() {
+            initializeJs(
+                '{% static 'frog/audio/splash.mp3' %}',
+                '{% static 'frog/audio/quak.mp3' %}',
+                '{% static 'frog/audio/intro-1.mp3' %}',
+            );
+        }
+
+    </script>
+{% endblock %}

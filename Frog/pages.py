@@ -2,6 +2,11 @@ from ._builtin import Page, WaitPage
 from .models import Constants
 
 
+class Instructions(Page):
+    def is_displayed(self):
+        return self.round_number == 1
+
+
 class Pond(Page):
     form_model = 'player'
     form_fields = ['frog_success']
@@ -81,6 +86,7 @@ class Results(Page):
 
 
 page_sequence = [
+    Instructions,
     Pond,
     SelectGameMode,
     PerceptionGroup,

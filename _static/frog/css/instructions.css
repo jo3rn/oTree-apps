@@ -1,0 +1,8 @@
+.finger {
+    position: absolute;
+    width: 6vw;
+    bottom: 0;
+    right: 0;
+    transition: all 1s;
+    visibility: hidden;
+}
