@@ -14,7 +14,7 @@ If the other side reveals a coin, it is added to the score. If one question mark
 class Constants(BaseConstants):
     name_in_url = 'AllAtOnce'
     players_per_group = None
-    num_rounds = 5
+    num_rounds = 7
     num_coins = 10
 
 
