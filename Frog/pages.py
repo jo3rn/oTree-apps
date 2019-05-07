@@ -49,6 +49,17 @@ class PerceptionGroup(Page):
         return self.round_number == Constants.num_test_rounds and self.participant.vars['game_mode'] == 2
 
 
+class AudioGameMode(Page):
+    def is_displayed(self):
+        return self.round_number == Constants.num_test_rounds
+
+    def vars_for_template(self):
+
+        return {
+            'game_mode': self.participant.vars['game_mode']
+        }
+
+
 class ResultsWaitPage(WaitPage):
     def is_displayed(self):
         return self.round_number == Constants.num_rounds
@@ -90,6 +101,7 @@ page_sequence = [
     Pond,
     SelectGameMode,
     PerceptionGroup,
+    AudioGameMode,
     ResultsWaitPage,
     Results
 ]

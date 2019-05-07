@@ -1,0 +1,24 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+
+{% block content %}
+{% endblock %}
+
+{% block scripts %}
+    <script>
+        let audio = new Audio();
+        {%  if game_mode == 1 %}
+            audio = new Audio('{% static 'frog/audio/single-player.wav' %}');
+        {% elif game_mode == 2 %}
+            audio = new Audio('{% static 'frog/audio/competition.wav' %}');
+        {% endif %}
+
+        audio.play().then(() => {
+            setTimeout(function() {
+                document.getElementById("form").submit();
+            }, audio.duration * 1000)
+        });
+    </script>
+
+{% endblock %}
