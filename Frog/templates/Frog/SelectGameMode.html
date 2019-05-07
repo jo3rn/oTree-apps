@@ -9,14 +9,14 @@
 
     <form>
     <div  class="grid">
-        <div class="single">
+        <div class="single" id="single">
             <label for="1">
               <input name="game_mode" type="submit" id="1" value="1"/>
               <img class="pictures" src="{% static 'frog/img/single_player.png' %}">
             </label>
         </div>
 
-        <div class="multi">
+        <div class="multi" id="multi">
             <label for="2">
               <input name="game_mode" type="submit" id="2" value="2"/>
               <img class="pictures" src="{% static 'frog/img/multi_player.png' %}">
@@ -24,5 +24,28 @@
         </div>
     </div>
     </form>
+
+{% endblock %}
+
+{% block scripts %}
+    <script>
+        const intro2Audio = new Audio('{% static 'frog/audio/intro-2.mp3' %}');
+        intro2Audio.play().then(() => {
+            setTimeout(auswahl, intro2Audio.duration * 1000)
+        });
+
+        function auswahl() {
+            new Audio('{% static 'frog/audio/auswahl.mp3' %}').play().then(() => {
+                setTimeout(function() {
+                    document.getElementById("single").style.visibility = "visible";
+                }, 8000);
+
+                setTimeout(function() {
+                    document.getElementById("multi").style.visibility = "visible";
+                }, 12000)
+
+            })
+        }
+    </script>
 
 {% endblock %}

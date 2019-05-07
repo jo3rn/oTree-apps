@@ -9,14 +9,14 @@
 
     <form>
     <div  class="grid">
-        <div class="others_higher">
+        <div class="others_higher" id="others_higher">
             <label for="higher">
               <input name="others_will_score" type="submit" id="higher" value="higher"/>
               <img class="pictures" src="{% static 'frog/img/others_higher.png' %}">
             </label>
         </div>
 
-        <div class="others_lower">
+        <div class="others_lower" id="others_lower">
             <label for="lower">
               <input name="others_will_score" type="submit" id="lower" value="lower"/>
               <img class="pictures" src="{% static 'frog/img/others_lower.png' %}">
@@ -24,5 +24,21 @@
         </div>
     </div>
     </form>
+
+{% endblock %}
+
+{% block scripts %}
+    <script>
+        const competitionConfAudio = new Audio('{% static 'frog/audio/competition-confidence.mp3' %}');
+        competitionConfAudio.play().then(() => {
+            setTimeout(function() {
+                    document.getElementById("others_higher").style.visibility = "visible";
+                }, 4000);
+
+                setTimeout(function() {
+                    document.getElementById("others_lower").style.visibility = "visible";
+                }, 6500)
+        });
+    </script>
 
 {% endblock %}

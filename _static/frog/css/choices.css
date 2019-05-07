@@ -23,3 +23,7 @@ label > input + img{ /* IMAGE STYLES */
     cursor:pointer;
     border:8px solid transparent;
 }
+
+.single, .multi, .others_higher, .others_lower{
+    visibility: hidden;
+}
