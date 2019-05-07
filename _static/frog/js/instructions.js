@@ -45,10 +45,10 @@ function initializeJs(pathToSplashAudio, pathToQuakAudio, pathToIntro1) {
 
     const intro1Audio = new Audio(pathToIntro1);
     intro1Audio.play().then(() => {
-        setTimeout(jumpFar, 22400);
-        setTimeout(jumpABit, 23800);
-        setTimeout(jumpLeft, 25200);
-        setTimeout(jumpRight, 26600);
+        setTimeout(jumpFar, 24700);
+        setTimeout(jumpABit, 26000);
+        setTimeout(jumpLeft, 27000);
+        setTimeout(jumpRight, 29400);
         setTimeout(advanceToNextPage, intro1Audio.duration * 1000);
     });
 }
