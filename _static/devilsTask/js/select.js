@@ -30,7 +30,6 @@ function initializeJs(numberOfCoins, pathToDevil, pathToCoin, pathToCoinAudio, p
     coinAudio = new Audio(pathToCoinAudio);
     devilAudio = new Audio(pathToDevilAudio);
 
-
     isModeOneByOne = oneByOneMode;
     isDevilClicked = false;
 

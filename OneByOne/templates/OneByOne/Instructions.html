@@ -1,14 +1,34 @@
 {% extends "global/Page.html" %}
 {% load otree static %}
 
+{% block styles %}
+    <link href='{% static "devilsTask/css/coinGrid.css" %}' rel="stylesheet" />
+    <link href='{% static "devilsTask/css/instructions.css" %}' rel="stylesheet" />
+{% endblock %}
+
 {% block title %}
     Instructions
 {% endblock %}
 
 {% block content %}
-    coming soon...
 
-    {% next_button %}
+    {% include "DevilsTaskInstructionArea.html" %}
+
 {% endblock %}
 
+{% block scripts %}
+    <script src="{% static "devilsTask/js/instructions.js" %}"></script>
+    <script>
+        window.onload = initialize;
 
+        function initialize() {
+            initializeJs(
+                '{% static 'devilsTask/img/coin.png' %}',
+                '{% static 'devilsTask/img/devil.jpg' %}',
+                '{% static 'devilsTask/audio/devil-intro.mp3' %}',
+                '{% static 'devilsTask/audio/anleitung-taler.mp3' %}',
+            );
+        }
+
+    </script>
+{% endblock %}

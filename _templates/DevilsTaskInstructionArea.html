@@ -1,0 +1,30 @@
+{% load staticfiles otree %}
+
+<div class="container" id="instructionsArea">
+    <div class="row">
+        <div class="col-9">
+            <div class="row">
+                <div id="coinWrapper" class="selectionWrapper">
+                    {% for point in num_coins_list %}
+                        <img class="coin" src='{% static 'devilsTask/img/unknown.png' %}' id='{{ point }}'/>
+                    {% endfor %}
+                </div>
+
+            </div>
+            <div class="row d-flex justify-content-between">
+                <div id="btnCollectCoins" class="buttonGeneral">Punkte sammeln</div>
+                <div id="btnCheckSelection" class="buttonGeneral">Auswahl prüfen</div>
+            </div>
+        </div>
+
+        <div class="col-3">
+            <p>Runde {{ round }} von {{ Constants.num_rounds }}</p>
+            <p>Gewonnene Punkte: {{ total_payoff_app }}</p>
+            <div id="pointWrapper" class="pointGrid">
+                {% for point in total_payoff_app_list %}
+                    <div class="point"></div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
