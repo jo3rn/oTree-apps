@@ -1,14 +1,40 @@
 {% extends "global/Page.html" %}
 {% load otree static %}
 
-{% block title %}
-    Ende
-{% endblock %}
-
 {% block content %}
 
-    Du hast {{ total }} Taler gewonnen.
+    <h1>{{ total }}</h1>
 
 {% endblock %}
 
+{% block scripts %}
+    <script>
+        const game_mode = {{ game_mode|json }};
 
+        let modeAudio = new Audio();
+
+        if (game_mode == 1) {
+            modeAudio = new Audio('{% static 'frog/audio/abschluss-single-player.wav' %}');
+        } else if (game_mode == 2) {
+            // modeAudio = new Audio('{% static 'frog/audio/abschluss-competition.wav' %}');
+        }
+
+        const total = {{ total|json }};
+        let audio = new Audio();
+
+        if (total == 0) {
+            audio = new Audio('{% static 'frog/audio/0-taler.wav' %}');
+        } else if (total == 10) {
+            audio = new Audio('{% static 'frog/audio/10-taler.wav' %}');
+        } else if (total == 20) {
+            audio = new Audio('{% static 'frog/audio/20-taler.wav' %}');
+        }
+
+        modeAudio.play().then(() => {
+            setTimeout(function() {
+                audio.play();
+            }, modeAudio.duration * 1000)
+        });
+    </script>
+
+{% endblock %}

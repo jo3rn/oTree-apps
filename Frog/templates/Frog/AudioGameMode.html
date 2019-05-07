@@ -1,18 +1,19 @@
 {% extends "global/Page.html" %}
 {% load otree static %}
 
-
 {% block content %}
 {% endblock %}
 
 {% block scripts %}
     <script>
+        const game_mode = {{ game_mode|json }};
+
         let audio = new Audio();
-        {%  if game_mode == 1 %}
+        if (game_mode == 1) {
             audio = new Audio('{% static 'frog/audio/single-player.wav' %}');
-        {% elif game_mode == 2 %}
+        } else if (game_mode == 2){
             audio = new Audio('{% static 'frog/audio/competition.wav' %}');
-        {% endif %}
+        }
 
         audio.play().then(() => {
             setTimeout(function() {

@@ -14,7 +14,7 @@ A player clicks on a frog and it jumps into a pond or not. The player can then c
 class Constants(BaseConstants):
     name_in_url = 'frog'
     players_per_group = None
-    num_test_rounds = 5
+    num_test_rounds = 10
     num_real_rounds = 10
     num_rounds = num_test_rounds + num_real_rounds
 

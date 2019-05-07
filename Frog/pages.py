@@ -54,7 +54,6 @@ class AudioGameMode(Page):
         return self.round_number == Constants.num_test_rounds
 
     def vars_for_template(self):
-
         return {
             'game_mode': self.participant.vars['game_mode']
         }
@@ -80,10 +79,12 @@ class Results(Page):
 
         if self.participant.vars['game_mode'] == 1:
             total = int(self.participant.payoff)
+            opponent_frogs = 0
         else:
-            if opponent.participant.payoff > self.participant.payoff:
+            opponent_frogs = opponent.participant.payoff
+            if opponent_frogs > self.participant.payoff:
                 total = 0
-            elif opponent.participant.payoff == self.participant.payoff:
+            elif opponent_frogs == self.participant.payoff:
                 total = 10
             else:
                 total = 20
@@ -92,6 +93,9 @@ class Results(Page):
         self.player.final_score = total
 
         return {
+            'own_frogs': self.participant.payoff,
+            'opponent_frogs': opponent_frogs,
+            'game_mode': self.participant.vars['game_mode'],
             'total': total
         }
 
