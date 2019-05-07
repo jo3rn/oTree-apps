@@ -29,20 +29,20 @@
 
 {% block scripts %}
     <script>
-        const intro2Audio = new Audio('{% static 'frog/audio/intro-2.mp3' %}');
+        const intro2Audio = new Audio('{% static 'frog/audio/intro-2.wav' %}');
         intro2Audio.play().then(() => {
             setTimeout(auswahl, intro2Audio.duration * 1000)
         });
 
         function auswahl() {
-            new Audio('{% static 'frog/audio/auswahl.mp3' %}').play().then(() => {
+            new Audio('{% static 'frog/audio/auswahl.wav' %}').play().then(() => {
                 setTimeout(function() {
                     document.getElementById("single").style.visibility = "visible";
-                }, 8000);
+                }, 12000);
 
                 setTimeout(function() {
                     document.getElementById("multi").style.visibility = "visible";
-                }, 12000)
+                }, 15000)
 
             })
         }
