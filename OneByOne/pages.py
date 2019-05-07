@@ -1,4 +1,4 @@
-from ._builtin import Page, WaitPage
+from ._builtin import Page
 from .models import Constants
 
 
@@ -34,14 +34,6 @@ class Select(Page):
         self.player.total_collected_coins = self.participant.payoff
 
 
-class ResultsWaitPage(WaitPage):
-    def is_displayed(self):
-        return self.round_number == Constants.num_rounds
-
-    def after_all_players_arrive(self):
-        pass
-
-
 class Results(Page):
     def vars_for_template(self):
         return {
@@ -55,6 +47,5 @@ class Results(Page):
 page_sequence = [
     Instructions,
     Select,
-    ResultsWaitPage,
     Results
 ]
