@@ -13,14 +13,10 @@
     border: 1px black solid;
 }
 
-#btnNewRound {
-    visibility: hidden;
-    border: 1px indigo solid;
-}
-
 #btnCheckSelection {
     visibility: hidden;
-    border: 1px greenyellow solid;
+    width: 100px;
+    height: 100px;
 }
 
 .buttonGeneral {

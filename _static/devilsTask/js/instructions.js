@@ -97,7 +97,7 @@ function highlightSomeCoins() {
     let i = 1;
     function delayedLoop() {
         setTimeout(function() {
-            coin = document.getElementById(i.toString());
+            const coin = document.getElementById(i.toString());
             coin.src = pathToCoinImg;
             coin.style.transition = "all 1s";
             coin.style.backgroundColor = "#90EE90";
