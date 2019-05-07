@@ -27,6 +27,7 @@ class Group(BaseGroup):
 
 
 class Player(BasePlayer):
+    gender = models.StringField()
     round_collected_coins = models.IntegerField()
     total_collected_coins = models.CurrencyField()
     round_clicks = models.IntegerField()

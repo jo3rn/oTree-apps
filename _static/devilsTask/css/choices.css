@@ -1,0 +1,44 @@
+.grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    height: 30vh;
+    max-width: 90vw;
+    justify-items: center;
+    margin-top: 5vh;
+}
+
+.singleGrid {
+    display: grid;
+    grid-template-columns: 1fr;
+    height: 30vh;
+    max-width: 90vw;
+    justify-items: center;
+    margin-top: 5vh;
+}
+
+.pictures{
+    padding: 5vmin;
+    border: 1px solid black;
+    max-height: 30vmin;
+    max-width: 40vmin;
+}
+
+.picturesNoBorder {
+    padding: 5vmin;
+    max-height: 30vmin;
+    max-width: 40vmin;
+}
+
+label > input{ /* HIDE SUBMIT */
+    visibility: hidden; /* Makes input not-clickable */
+    position: absolute; /* Remove input from document flow */
+}
+
+label > input + img{ /* IMAGE STYLES */
+    cursor:pointer;
+    border:8px solid transparent;
+}
+
+.single, .multi, .others_higher, .others_lower{
+    visibility: hidden;
+}

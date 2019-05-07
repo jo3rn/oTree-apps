@@ -1,0 +1,18 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block styles %}
+    <link href='{% static "devilsTask/css/choices.css" %}' rel="stylesheet" />
+{% endblock %}
+
+{% block content %}
+    <div class="singleGrid">
+        <form>
+            <label for="start">
+              <input name="start" type="submit" id="start" value="start"/>
+              <img class="picturesNoBorder" src="{% static 'devilsTask/img/start.png' %}">
+            </label>
+        </form>
+    </div>
+
+{% endblock %}
