@@ -45,10 +45,10 @@ function initializeJs(pathToSplashAudio, pathToQuakAudio, pathToIntro1) {
 
     const intro1Audio = new Audio(pathToIntro1);
     intro1Audio.play().then(() => {
-        setTimeout(jumpFar, 24500);
-        setTimeout(jumpABit, 25700);
-        setTimeout(jumpLeft, 27400);
-        setTimeout(jumpRight, 29600);
+        setTimeout(jumpFar, 24200);
+        setTimeout(jumpABit, 25600);
+        setTimeout(jumpLeft, 27300);
+        setTimeout(jumpRight, 29400);
         setTimeout(advanceToNextPage, intro1Audio.duration * 1000);
     });
 }
@@ -59,7 +59,7 @@ function jumpFar() {
     setTimeout(function() {
         finger4.style.visibility = "hidden";
         frog4.style.transform = `translate(0px, -200px)`;
-    }, 600)
+    }, 900)
 }
 
 function jumpABit() {
@@ -68,7 +68,7 @@ function jumpABit() {
     setTimeout(function() {
         finger3.style.visibility = "hidden";
         frog3.style.transform = `translate(0px, -50px)`;
-    }, 600)
+    }, 700)
 }
 
 function jumpLeft() {
@@ -77,7 +77,7 @@ function jumpLeft() {
     setTimeout(function() {
         finger2.style.visibility = "hidden";
         frog2.style.transform = `translate(-100px, 0px)`;
-    }, 600)
+    }, 700)
 }
 
 function jumpRight() {
@@ -86,7 +86,7 @@ function jumpRight() {
     setTimeout(function() {
         finger1.style.visibility = "hidden";
         frog1.style.transform = `translate(100px, 0px)`;
-    }, 600)
+    }, 800)
 }
 
 function advanceToNextPage() {
