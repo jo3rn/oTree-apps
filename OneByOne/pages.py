@@ -62,6 +62,5 @@ page_sequence = [
     Gender,
     Start,
     Instructions,
-    Select,
-    Results
+    Select
 ]
