@@ -14,8 +14,9 @@ class Pond(Page):
     def before_next_page(self):
         if self.round_number == 0:
             self.participant.vars["test_frogs"] = 0
+            self.participant.vars["real_frogs"] = 0
         if self.round_number > Constants.num_test_rounds:
-            self.player.payoff = self.player.frog_success
+            self.participant.vars['real_frogs'] += self.player.frog_success
         else:
             self.participant.vars["test_frogs"] += self.player.frog_success
 
@@ -23,7 +24,7 @@ class Pond(Page):
         if self.round_number <= Constants.num_test_rounds:
             frogs = self.participant.vars["test_frogs"]
         else:
-            frogs = self.participant.payoff
+            frogs = self.participant.vars['real_frogs']
         return {
             'round': self.round_number - Constants.num_test_rounds,
             'frogs': frogs,
@@ -76,15 +77,17 @@ class Results(Page):
         opponent_index = self.participant.vars['opponent_index']
         opponent_id = self.player.get_opponent_id(opponent_index)
         opponent = self.group.get_player_by_id(opponent_id)
+        own_frogs = self.participant.vars['real_frogs']
 
         if self.participant.vars['game_mode'] == 1:
-            total = int(self.participant.payoff)
+            total = own_frogs
             opponent_frogs = 0
         else:
-            opponent_frogs = opponent.participant.payoff
-            if opponent_frogs > self.participant.payoff:
+            opponent_frogs = opponent.participant.vars['real_frogs']
+
+            if opponent_frogs > own_frogs:
                 total = 0
-            elif opponent_frogs == self.participant.payoff:
+            elif opponent_frogs == own_frogs:
                 total = 10
             else:
                 total = 20

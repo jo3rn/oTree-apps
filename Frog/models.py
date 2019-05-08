@@ -25,6 +25,7 @@ class Subsession(BaseSubsession):
             number_of_opponents = len(self.get_players()) - 1
             for p in self.get_players():
                 p.participant.vars["test_frogs"] = 0
+                p.participant.vars['real_frogs'] = 0
                 p.participant.vars['opponent_index'] = random.randrange(0, number_of_opponents)
 
 
