@@ -7,7 +7,7 @@ If you have Python 3 already installed, you only need to run `pip3 install -U ot
 In all other cases please work your way through the [installation guidelines for oTree](https://otree.readthedocs.io/en/latest/install.html)
 
 ### Start an app
-Clone or download this repository to your device. Open a terminal window (e.g. PowerShell on Windows), navigate inside the repository's directory and enter `otree devserver`. Open your browser and enter http://127.0.0.1:8000 in the address bar. You will have access to invitation links for participants in the same network.
+Clone or download this repository to your device. Open a terminal window (e.g. PowerShell on Windows), navigate inside the repository's directory and enter `otree devserver`. Open your browser and enter http://127.0.0.1:8000 or http://localhost:8000 in the address bar. You will have access to invitation links for participants in the same network. If you instead see a message that your database is not ready, try running `otree resetdb` in the terminal window and confirm with `y`, then run `otree devserver` again.
 
 Remark: While this works for a small number of concurrent participants in a local network, you might want to consider hosting the application on a server. Read the [corresponding chapter in the oTree documentation](https://otree.readthedocs.io/en/latest/server/intro.html) for further details.
 
