@@ -56,5 +56,4 @@ page_sequence = [
     Instructions,
     SelectAll,
     ResultsWaitPage,
-    Results
 ]
