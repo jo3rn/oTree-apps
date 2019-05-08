@@ -29,7 +29,7 @@
 
 {% block scripts %}
     <script>
-        const competitionConfAudio = new Audio('{% static 'frog/audio/competition-confidence.mp3' %}');
+        const competitionConfAudio = new Audio('{% static 'frog/audio/competition-confidence.wav' %}');
         competitionConfAudio.play().then(() => {
             setTimeout(function() {
                     document.getElementById("others_higher").style.visibility = "visible";
