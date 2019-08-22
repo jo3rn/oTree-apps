@@ -4,7 +4,7 @@ from .models import Constants
 
 class Gender(Page):
     form_model = 'player'
-    form_fields = ['gender']
+    form_fields = ['gender', 'participant_code']
 
     def is_displayed(self):
         return self.round_number == 1
