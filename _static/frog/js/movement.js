@@ -91,7 +91,7 @@ function checkIfFrogIsInPond() {
     if (frogCenterX <= pondLeft || frogCenterY >= pondBottom || frogCenterX >= pondRight || frogCenterY <= pondTop) {
         quakAudio.play();
         frogInPond.value = 0;
-        frog.style.backgroundColor = "#F00";
+        frog.style.backgroundColor = "#94CC00";
         frog.style.transform = "rotate(360deg)";
     } else {
         splashAudio.play();
