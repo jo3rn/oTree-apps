@@ -31,5 +31,6 @@ class Player(BasePlayer):
     round_collected_coins = models.IntegerField()
     total_collected_coins = models.CurrencyField()
     round_clicks = models.IntegerField()
+    round_selected = models.IntegerField()
     round_time = models.IntegerField()
 

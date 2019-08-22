@@ -1,5 +1,6 @@
 let score = 0;
 let clicks = 0;
+let selected = 0;
 let pointsToAdd;
 let randomDevil;
 const startTime = new Date();
@@ -9,6 +10,7 @@ const coinGrid = document.getElementById("coinWrapper");
 const imagesInCoinGrid = coinGrid.querySelectorAll("img");
 const roundCollectedCoins = document.getElementById("round_collected_coins");
 const roundClicks = document.getElementById("round_clicks");
+const roundSelected = document.getElementById("round_selected");
 const roundTime = document.getElementById("round_time");
 
 let pathToDevilImg;
@@ -60,13 +62,16 @@ function addFieldEventListeners() {
 function revealCoin() {
     clicks += 1;
     if (isModeOneByOne) {
+        selected += 1;
         this.removeEventListener("click", revealCoin);
         this.src = pathToCoinImg;
         this.style.backgroundColor = "#90EE90";
     } else {
         if (!this.classList.contains("revealMe")) {
+            selected += 1;
             this.classList.add("revealMe");
         } else {
+            selected -= 1;
             this.classList.remove("revealMe");
             pointsToAdd -= 1;
             return;
@@ -79,6 +84,7 @@ function revealCoin() {
 function revealDevil() {
     clicks += 1;
     if (isModeOneByOne) {
+        selected += 1;
         pointsToAdd = 0;
         this.src = pathToDevilImg;
         removeFieldEventListeners();
@@ -86,8 +92,10 @@ function revealDevil() {
         hideElement(btnCollect);
     } else {
         if (!this.classList.contains("revealMe")) {
+            selected += 1;
             this.classList.add("revealMe");
         } else {
+            selected -= 1;
             this.classList.remove("revealMe");
         }
         isDevilClicked = !isDevilClicked;
@@ -140,6 +148,7 @@ function checkSelection() {
 function trackTimeAndClicks() {
     roundTime.value = new Date() - startTime;
     roundClicks.value = clicks;
+    roundSelected.value = selected;
 }
 
 function removeFieldEventListeners() {

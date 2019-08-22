@@ -31,7 +31,7 @@ class Instructions(Page):
 
 class Select(Page):
     form_model = 'player'
-    form_fields = ['round_collected_coins', 'round_clicks', 'round_time']
+    form_fields = ['round_collected_coins', 'round_clicks', 'round_selected', 'round_time']
 
     def vars_for_template(self):
         cumulative_payoff = sum([p.payoff for p in self.player.in_all_rounds()])
