@@ -11,6 +11,7 @@ let anleitungZweiterTeilAudio = new Audio();
 let sichernSchlossTippenAudio = new Audio();
 let insgesamtSiebenRundenAudio = new Audio();
 let jetztDuAudio = new Audio();
+let wennDuFragenHastAudio = new Audio();
 
 function initializeJs(
     pathToCoin,
@@ -23,6 +24,7 @@ function initializeJs(
     sichernSchlossTippenPath,
     insgesamtSiebenRundenPath,
     jetztDuPath,
+    wennDuFragenHastPath,
     ) {
     pathToDevilImg = pathToDevil;
     pathToCoinImg = pathToCoin;
@@ -35,6 +37,7 @@ function initializeJs(
     sichernSchlossTippenAudio = new Audio(sichernSchlossTippenPath);
     insgesamtSiebenRundenAudio = new Audio(insgesamtSiebenRundenPath);
     jetztDuAudio = new Audio(jetztDuPath);
+    wennDuFragenHastAudio = new Audio(wennDuFragenHastPath);
 
     const playPromise = devilIntroAudio.play();
 
@@ -133,11 +136,11 @@ function showLock() {
     const lock = document.getElementById("btnCollectCoins");
     lock.style.visibility = "visible";
     lock.style.transition = "all 0.8s";
-    lock.style.height = "200px";
-    lock.style.width = "200px";
+    lock.style.height = "230px";
+    lock.style.width = "230px";
     setTimeout(function() {
-        lock.style.height = "100px";
-        lock.style.width = "100px";
+        lock.style.height = "150px";
+        lock.style.width = "150px";
 
     }, 800)
 }
@@ -145,7 +148,7 @@ function showLock() {
 function insgesamtSiebenRunden() {
     showQuestionMarksAgain();
     insgesamtSiebenRundenAudio.play().then(() => {
-        setTimeout(showDevilAtEverySpot, 24000);
+        setTimeout(showDevilAtEverySpot, 21400);
         setTimeout(jetztDu, insgesamtSiebenRundenAudio.duration * 1000 + audioPause)
     })
 }
@@ -173,7 +176,13 @@ function showDevilAtEverySpot() {
 
 function jetztDu() {
     jetztDuAudio.play().then(() => {
-        setTimeout(advanceToNextPage, jetztDuAudio.duration * 1000)
+        setTimeout(wennDuFragenHast, jetztDuAudio.duration * 1000 + audioPause)
+    })
+}
+
+function wennDuFragenHast() {
+    wennDuFragenHastAudio.play().then(() => {
+        setTimeout(advanceToNextPage, wennDuFragenHastAudio.duration * 1000)
     })
 }
 
