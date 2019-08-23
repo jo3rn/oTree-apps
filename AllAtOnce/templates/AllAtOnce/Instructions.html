@@ -4,6 +4,12 @@
 {% block styles %}
     <link href='{% static "devilsTask/css/coinGrid.css" %}' rel="stylesheet" />
     <link href='{% static "devilsTask/css/instructions.css" %}' rel="stylesheet" />
+
+    <style>
+        body {
+            background-color: lightyellow;
+        }
+    </style>
 {% endblock %}
 
 {% block content %}
@@ -22,9 +28,10 @@
                 '{% static 'devilsTask/img/unknown.png' %}',
                 '{% static 'devilsTask/audio/pass-gut-auf.mp3' %}',
                 '{% static 'devilsTask/audio/hinter-den-feldern.mp3' %}',
-                '{% static 'devilsTask/audio/erst-wenn.mp3' %}',
+                '{% static 'devilsTask/audio/Erst wenn Du auf die Lupe tippst.mp3' %}',
                 '{% static 'devilsTask/audio/wenn-aber-das-teufelchen.mp3' %}',
                 '{% static 'devilsTask/audio/insgesamt-sieben-runden-2.mp3' %}',
+                '{% static 'devilsTask/audio/Wenn Du Fragen hast.mp3' %}',
             );
         }
 

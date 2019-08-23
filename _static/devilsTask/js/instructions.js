@@ -127,20 +127,20 @@ function sichernSchlossTippen() {
     showQuestionMarksAgain();
     sichernSchlossTippenAudio.play().then(() => {
         highlightSomeCoins();
-        setTimeout(showLock, 5000);
+        setTimeout(showTreasureChest, 5000);
         setTimeout(insgesamtSiebenRunden, sichernSchlossTippenAudio.duration * 1000 + audioPause)
     })
 }
 
-function showLock() {
-    const lock = document.getElementById("btnCollectCoins");
-    lock.style.visibility = "visible";
-    lock.style.transition = "all 0.8s";
-    lock.style.height = "230px";
-    lock.style.width = "230px";
+function showTreasureChest() {
+    const treasureChest = document.getElementById("btnCollectCoins");
+    treasureChest.style.visibility = "visible";
+    treasureChest.style.transition = "all 0.8s";
+    treasureChest.style.height = "230px";
+    treasureChest.style.width = "230px";
     setTimeout(function() {
-        lock.style.height = "150px";
-        lock.style.width = "150px";
+        treasureChest.style.height = "150px";
+        treasureChest.style.width = "150px";
 
     }, 800)
 }
