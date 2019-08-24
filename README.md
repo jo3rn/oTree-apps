@@ -14,9 +14,9 @@ Remark: While this works for a small number of concurrent participants in a loca
 # App overview
 
 ## DevilsTask
-a game where a player reveals coins or THE DEVIL!!1!
+a game where a player reveals coins or the devil!
 ## Frog
-to be implemented
+a game where a player helps frogs into a pond - optionally against another player
 
 # Links
 [oTree on GitHub](https://github.com/oTree-org) (for the curious)
