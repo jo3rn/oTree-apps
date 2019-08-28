@@ -35,14 +35,14 @@
         });
 
         function auswahl() {
-            new Audio('{% static 'frog/audio/auswahl.wav' %}').play().then(() => {
+            new Audio('{% static 'frog/audio/Du kannst Dir jetzt aussuchen (Auswahl).mp3' %}').play().then(() => {
                 setTimeout(function() {
                     document.getElementById("single").style.visibility = "visible";
-                }, 12000);
+                }, 26000);
 
                 setTimeout(function() {
                     document.getElementById("multi").style.visibility = "visible";
-                }, 15000)
+                }, 31000)
 
             })
         }

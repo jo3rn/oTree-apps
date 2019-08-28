@@ -9,6 +9,7 @@ let hinterDenFeldernAudio = new Audio();
 let erstWennAudio = new Audio();
 let wennAberDasTeufelchenAudio = new Audio();
 let insgesamtSiebenRunden2Audio = new Audio();
+let wennDuFragenHastAudio = new Audio();
 
 function initializeJs(
     pathToCoin,
@@ -19,6 +20,7 @@ function initializeJs(
     erstWennPath,
     wennAberDasTeufelchenPath,
     insgesamtSiebenRunden2Path,
+    wennDuFragenHastPath,
     ) {
     pathToDevilImg = pathToDevil;
     pathToCoinImg = pathToCoin;
@@ -29,6 +31,7 @@ function initializeJs(
     erstWennAudio = new Audio(erstWennPath);
     wennAberDasTeufelchenAudio = new Audio(wennAberDasTeufelchenPath);
     insgesamtSiebenRunden2Audio = new Audio(insgesamtSiebenRunden2Path);
+    wennDuFragenHastAudio = new Audio(wennDuFragenHastPath);
 
     passGutAufAudio.play().then(() => {
         setTimeout(hinterDenFeldern, passGutAufAudio.duration * 1000 + audioPause)
@@ -54,31 +57,42 @@ function markSomeFields() {
             if (i< 10) {
                 delayedLoop()
             }
-        }, 750)
+        }, 250)
     }
 
     delayedLoop();
 }
 
+function markFewFields() {
+    const coin1 = document.getElementById("1");
+    const coin5 = document.getElementById("5");
+    coin1.style.transition = "all 1s";
+    coin1.style.backgroundColor = "#FFC43D";
+    coin5.style.transition = "all 1s";
+    coin5.style.backgroundColor = "#FFC43D";
+}
+
 function erstWenn() {
     erstWennAudio.play().then(() => {
-        setTimeout(showLock, 1200);
-        setTimeout(revealSomeCoins, 4000);
-        setTimeout(showQuestionMarksAgain, 9000);
-        setTimeout(markSomeFields, 13000);
+        setTimeout(showMagnifyingGlass, 1300);
+        setTimeout(revealSomeCoins, 5200);
+        setTimeout(showQuestionMarksAgain, 10500);
+        setTimeout(markFewFields, 19000);
+        setTimeout(markSomeFields, 20500);
+        setTimeout(showMagnifyingGlass, 24500);
         setTimeout(wennAberDasTeufelchen, erstWennAudio.duration * 1000 + audioPause)
     })
 }
 
-function showLock() {
-    const lock = document.getElementById("btnCheckSelection");
-    lock.style.visibility = "visible";
-    lock.style.transition = "all 0.8s";
-    lock.style.height = "200px";
-    lock.style.width = "200px";
+function showMagnifyingGlass() {
+    const magnifyingGlass = document.getElementById("btnCheckSelection");
+    magnifyingGlass.style.visibility = "visible";
+    magnifyingGlass.style.transition = "all 0.8s";
+    magnifyingGlass.style.height = "230px";
+    magnifyingGlass.style.width = "230px";
     setTimeout(function() {
-        lock.style.height = "100px";
-        lock.style.width = "100px";
+        magnifyingGlass.style.height = "150px";
+        magnifyingGlass.style.width = "150px";
 
     }, 800)
 }
@@ -97,7 +111,7 @@ function showQuestionMarksAgain() {
         const coin = document.getElementById(i.toString());
         coin.src = pathToQuestionMarkImg;
         coin.style.transition = "all 0.5s";
-        coin.style.backgroundColor = "#FFF";
+        coin.style.backgroundColor = "rgba(0,0,0,0)";
     }
 }
 
@@ -124,7 +138,13 @@ function revealSomeCoinsAndDevil() {
 
 function insgesamtSiebenRunden2() {
     insgesamtSiebenRunden2Audio.play().then(() => {
-        setTimeout(advanceToNextPage, insgesamtSiebenRunden2Audio.duration * 1000)
+        setTimeout(wennDuFragenHast, insgesamtSiebenRunden2Audio.duration * 1000 + audioPause)
+    })
+}
+
+function wennDuFragenHast() {
+    wennDuFragenHastAudio.play().then(() => {
+        setTimeout(advanceToNextPage, wennDuFragenHastAudio.duration * 1000)
     })
 }
 

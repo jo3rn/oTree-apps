@@ -87,8 +87,12 @@ function checkIfFrogIsInPond() {
     const frogBottom = frogRect.bottom;
     const frogCenterX = (frogRight + frogLeft) / 2;
     const frogCenterY = (frogBottom + frogTop) /2;
+    const difficulty = - 20; // int between -100 and 0; 0 is the hardest
 
-    if (frogCenterX <= pondLeft || frogCenterY >= pondBottom || frogCenterX >= pondRight || frogCenterY <= pondTop) {
+    if (frogCenterX <= pondLeft + difficulty ||
+        frogCenterY >= pondBottom - difficulty ||
+        frogCenterX >= pondRight - difficulty ||
+        frogCenterY <= pondTop + difficulty) {
         quakAudio.play();
         frogInPond.value = 0;
         frog.style.backgroundColor = "#94CC00";

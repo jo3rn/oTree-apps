@@ -12,14 +12,14 @@
         <div class="others_higher" id="others_higher">
             <label for="higher">
               <input name="others_will_score" type="submit" id="higher" value="higher"/>
-              <img class="pictures" src="{% static 'frog/img/others_higher.png' %}">
+              <img class="picturesPerception" src="{% static 'frog/img/others_higher.png' %}">
             </label>
         </div>
 
         <div class="others_lower" id="others_lower">
             <label for="lower">
               <input name="others_will_score" type="submit" id="lower" value="lower"/>
-              <img class="pictures" src="{% static 'frog/img/others_lower.png' %}">
+              <img class="picturesPerception" src="{% static 'frog/img/others_lower.png' %}">
             </label>
         </div>
     </div>
@@ -29,16 +29,22 @@
 
 {% block scripts %}
     <script>
-        const competitionConfAudio = new Audio('{% static 'frog/audio/competition-confidence.wav' %}');
+        const competitionConfAudio = new Audio('{% static 'frog/audio/Du möchtest also gegen (CompetitionConfidence).mp3' %}');
         competitionConfAudio.play().then(() => {
+            setTimeout(showOptions, competitionConfAudio.duration * 1000)
+        });
+
+        function showOptions() {
+            new Audio('{% static 'frog/audio/wenn du glaubst dass du.mp3' %}').play().then(() => {
             setTimeout(function() {
                     document.getElementById("others_higher").style.visibility = "visible";
-                }, 4000);
+                }, 8000);
 
                 setTimeout(function() {
                     document.getElementById("others_lower").style.visibility = "visible";
-                }, 6500)
-        });
+                }, 17000)
+            });
+        }
     </script>
 
 {% endblock %}
