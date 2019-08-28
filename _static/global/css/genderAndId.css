@@ -1,0 +1,85 @@
+.grid-container {
+    display: grid;
+    max-height: 80vh;
+    max-width: 90vh;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    grid-gap: 1px;
+    grid-template-areas: "male calculator calculator calculator" "female calculator calculator calculator";
+  }
+  
+  .male { grid-area: male; }
+  
+  .female { grid-area: female; }
+  
+  .calculator { grid-area: calculator; }
+  
+  #input {
+      height: 100%;
+      display: flex;
+      flex-flow: row wrap;
+      justify-content: center;
+      align-items: flex-start;
+      font-size: 1.5em;
+  }
+  
+  .result {
+      min-height: 70px;
+      line-height: 60px;
+      border: 1px solid black;
+      justify-content: flex-end;
+      background: #000;
+      color:#fff;
+      padding:0 10px;
+      font-size: 2em;
+  }
+  
+  .buttons, .result {
+      display: flex;
+      flex-wrap: wrap;
+      flex: 0 1 100%;
+      justify-content: flex-start;
+  }
+  
+  .calcButton {
+      line-height: 40px;
+      border: 1px solid black;
+      background-color: lightgrey;
+      padding: 1em;
+      text-align: center;
+      width: 33.3%;
+  
+  }
+  
+  .delete {
+      flex-grow: 2;
+      background-color: lightcoral;
+  }
+  
+  #okay {
+      justify-content: flex-end;
+      margin-top: 30px;
+      width: 100%;
+      min-height: 75px;
+      visibility: hidden;
+      font-size: 1.5em;
+      background-color: lightgreen;
+  }
+  
+  .pictures{
+      max-height:50%;
+      max-width: 50%;
+  }
+  
+  label > input{ /* HIDE RADIO */
+      visibility: hidden; /* Makes input not-clickable */
+      position: absolute; /* Remove input from document flow */
+  }
+  label > input + img{ /* IMAGE STYLES */
+      cursor:pointer;
+      border:8px solid transparent;
+  }
+  label > input:checked + img{ /* (RADIO CHECKED) IMAGE STYLES */
+      border:8px solid #0f0;
+  }
+  

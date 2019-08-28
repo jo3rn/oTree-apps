@@ -1,0 +1,79 @@
+{% load otree %}
+
+{% block styles %}
+<link href="{% static "global/css/genderAndId.css" %}" rel="stylesheet" />
+{% endblock %}
+
+{% block content %}
+
+<input type="hidden" name="gender" value="" id="gender"/>
+
+<div class="grid-container">
+<form>
+<div class="male">
+
+<label for="male">
+  <input name="gender" type="radio" id="male" value="male"/>
+  <img class="pictures" src="{% static 'global/img/male.png' %}">
+</label>
+</div>
+
+<div class="female">
+<label for="female">
+  <input name="gender" type="radio" id="female" value="female"/>
+  <img class="pictures" src="{% static 'global/img/female.png' %}">
+</label>
+
+</div>
+</form>
+
+
+<div class="calculator">
+
+<div id="input">
+  <div class="result" id="result"></div>
+  <div class="buttons">
+    <span class="calcButton" onclick="setResult(7)">7</span>
+    <span class="calcButton" onclick="setResult(8)">8</span>
+    <span class="calcButton" onclick="setResult(9)">9</span>
+    <span class="calcButton" onclick="setResult(4)">4</span>
+    <span class="calcButton" onclick="setResult(5)">5</span>
+    <span class="calcButton" onclick="setResult(6)">6</span>
+    <span class="calcButton" onclick="setResult(1)">1</span>
+    <span class="calcButton" onclick="setResult(2)">2</span>
+    <span class="calcButton" onclick="setResult(3)">3</span>
+    <span class="calcButton" onclick="setResult(0)">0</span>
+    <span class="calcButton delete" onclick="deleteResult()">DEL</span>
+
+  </div>
+  <button id="okay" class="otree-btn-next btn next-button otree-next-button" onclick="writeParticipantCode()">OK</button>
+</div>
+
+</div>
+</div>
+
+<input type="hidden" name="participant_code" value="" id="participant_code"/>
+
+{% endblock %}
+
+{% block scripts %}
+<script type="text/javascript">
+
+function writeParticipantCode() {
+  document.getElementById("participant_code").value = document.getElementById('result').innerHTML;
+}
+
+function setResult(x) {
+  document.getElementById("okay").style.visibility = 'visible';
+
+  var oldContent = document.getElementById('result').innerHTML;
+  document.getElementById('result').innerHTML = oldContent + x;
+}
+
+function deleteResult(x) {
+  document.getElementById("okay").style.visibility = 'hidden';
+  document.getElementById('result').innerHTML = '';
+}
+
+</script>
+{% endblock %}

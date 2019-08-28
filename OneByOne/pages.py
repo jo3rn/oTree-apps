@@ -2,7 +2,7 @@ from ._builtin import Page
 from .models import Constants
 
 
-class Gender(Page):
+class GenderAndId(Page):
     form_model = 'player'
     form_fields = ['gender', 'participant_code']
 
@@ -11,7 +11,6 @@ class Gender(Page):
 
 
 class Start(Page):
-
     def is_displayed(self):
         return self.round_number == 1
 
@@ -59,7 +58,7 @@ class Results(Page):
 
 
 page_sequence = [
-    Gender,
+    GenderAndId,
     Start,
     Instructions,
     Select
