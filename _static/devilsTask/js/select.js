@@ -18,11 +18,13 @@ let pathToCoinImg;
 
 let coinAudio = new Audio();
 let devilAudio = new Audio();
+let reminderAudio = new Audio();
 
 let isModeOneByOne;
 let isDevilClicked = false;
+let isRoundFinished = false;
 
-function initializeJs(numberOfCoins, pathToDevil, pathToCoin, pathToCoinAudio, pathToDevilAudio, oneByOneMode) {
+function initializeJs(numberOfCoins, pathToDevil, pathToCoin, pathToCoinAudio, pathToDevilAudio, pathToReminderAudio, oneByOneMode) {
     // random number between 0 and num_coins
     randomDevil = Math.floor(Math.random() * numberOfCoins);
     pointsToAdd = 0;
@@ -31,6 +33,7 @@ function initializeJs(numberOfCoins, pathToDevil, pathToCoin, pathToCoinAudio, p
     pathToCoinImg = pathToCoin;
     coinAudio = new Audio(pathToCoinAudio);
     devilAudio = new Audio(pathToDevilAudio);
+    reminderAudio = new Audio(pathToReminderAudio);
 
     isModeOneByOne = oneByOneMode;
     isDevilClicked = false;
@@ -46,6 +49,8 @@ function initializeJs(numberOfCoins, pathToDevil, pathToCoin, pathToCoinAudio, p
         hideElement(btnCollect);
         showElement(btnCheck);
     }
+
+    setTimeout(playReminder, 25000);
 }
 
 function addFieldEventListeners() {
@@ -84,6 +89,7 @@ function revealCoin() {
 function revealDevil() {
     clicks += 1;
     if (isModeOneByOne) {
+        isRoundFinished = true;
         selected += 1;
         pointsToAdd = 0;
         this.src = pathToDevilImg;
@@ -103,6 +109,7 @@ function revealDevil() {
 }
 
 function collectPoints() {
+    isRoundFinished = true;
 	coinAudio.play();
     hideElement(btnCollect);
     removeFieldEventListeners();
@@ -120,6 +127,7 @@ function startNewRoundAfterDevil() {
 }
 
 function checkSelection() {
+    isRoundFinished = true;
     hideElement(btnCheck);
     removeFieldEventListeners();
 
@@ -165,6 +173,17 @@ function hideElement(element) {
 
 function showElement(element) {
     element.style.visibility = "visible";
+}
+
+function playReminder() {
+    if (!isRoundFinished) {
+        reminderAudio.play().then(() => {
+            setTimeout(playReminder, 20000);
+        }).catch(e => {
+            console.log(e.message);
+            setTimeout(playReminder, 20000);
+        });
+    }   
 }
 
 function advanceToNextPage() {
