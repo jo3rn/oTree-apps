@@ -1,7 +1,16 @@
 {% extends "global/Page.html" %}
 {% load otree static %}
 
+{% block styles %}
+    <link href='{% static 'frog/css/pond.css' %}' rel="stylesheet" />
+{% endblock %}
+
 {% block content %}
+
+    <div id="container">
+        <div id="pond" class="pond"></div>
+    </div>
+
 {% endblock %}
 
 {% block scripts %}
