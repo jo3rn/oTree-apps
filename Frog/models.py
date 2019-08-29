@@ -17,6 +17,8 @@ class Constants(BaseConstants):
     num_test_rounds = 10
     num_real_rounds = 10
     num_rounds = num_test_rounds + num_real_rounds
+    multiplayer_coins_win = 20
+    multiplayer_coins_tie = 10
 
 
 class Subsession(BaseSubsession):

@@ -2,40 +2,187 @@
 {% load otree static %}
 
 {% block styles %}
-    <link href='{% static "frog/css/choices.css" %}' rel="stylesheet" />
+    <link href='{% static 'frog/css/pond.css' %}' rel="stylesheet" />
+    <link href='{% static 'frog/css/selectGameMode.css' %}' rel="stylesheet" />
+    <link href='{% static 'frog/css/choices.css' %}' rel="stylesheet" />
 {% endblock %}
 
 {% block content %}
 
-    <form>
-    <div  class="grid">
-        <div class="single" id="single">
-            <label for="1">
-              <input name="game_mode" type="submit" id="1" value="1"/>
-              <img class="pictures" src="{% static 'frog/img/single_player.png' %}">
-            </label>
+    <div id="container">
+        <div id="pond" class="pond"></div>
+        <div id="pond2" class="small_pond"></div>
+        <div id="pond3" class="small_pond"></div>
+        <div id="frog1" class="frog"></div>
+        <div id="frog2" class="small_frog"></div>
+        <div id="frog3" class="small_frog"></div>
+        <div id="coins_left_player_wins" class="coinsToWin">
+            {% for coin in multiplayer_coins_win %}
+                <img class="coin" src='{% static 'frog/img/coin.png' %}'/>
+            {% endfor %}
         </div>
-
-        <div class="multi" id="multi">
-            <label for="2">
-              <input name="game_mode" type="submit" id="2" value="2"/>
-              <img class="pictures" src="{% static 'frog/img/multi_player.png' %}">
-            </label>
+        <div id="coins_left_player_tie" class="coinsToWin">
+            {% for coin in multiplayer_coins_tie %}
+                <img class="coin" src='{% static 'frog/img/coin.png' %}'/>
+            {% endfor %}
+        </div>
+        <div id="coins_right_player_tie" class="coinsToWin">
+            {% for coin in multiplayer_coins_tie %}
+                <img class="coin" src='{% static 'frog/img/coin.png' %}'/>
+            {% endfor %}
         </div>
     </div>
+
+    <form>
+        <div id="grid_form" class="grid">
+            <div class="single" id="single">
+                <label for="1">
+                <input name="game_mode" type="submit" id="1" value="1"/>
+                <img class="pictures" src="{% static 'frog/img/single_player.png' %}">
+                </label>
+            </div>
+
+            <div class="multi" id="multi">
+                <label for="2">
+                <input name="game_mode" type="submit" id="2" value="2"/>
+                <img class="pictures" src="{% static 'frog/img/multi_player.png' %}">
+                </label>
+            </div>
+        </div>
     </form>
+
+    
 
 {% endblock %}
 
 {% block scripts %}
     <script>
+        const container = document.getElementById('container');
+        const gridForm = document.getElementById('grid_form');
+        
+        const pond = document.getElementById('pond');
+        const pond2 = document.getElementById('pond2');
+        const pond3 = document.getElementById('pond3');
+        const frog1 = document.getElementById('frog1');
+        const frog2 = document.getElementById('frog2');
+        const frog3 = document.getElementById('frog3');
+
+        const coinsLeftPlayerWins = document.getElementById('coins_left_player_wins');
+        const coinsLeftPlayerTie = document.getElementById('coins_left_player_tie');
+        const coinsRightPlayerTie = document.getElementById('coins_right_player_tie');
+
+        pond2.style.left = '25%';
+        pond3.style.left = '75%';
+        gridForm.style.display = 'none';
+
+        const containerRect = container.getBoundingClientRect();
+        const containerLength = containerRect.right - containerRect.left;
+
+        
+        frog1.style.left = (containerLength - containerLength * 0.575).toString() + "px";
+        frog2.style.left = (containerLength - containerLength * 0.7875).toString() + "px";
+        frog3.style.left = (containerLength - containerLength * 0.2875).toString() + "px";
+        frog1.style.top = (containerLength * 0.8).toString() + "px";
+        frog2.style.top = (containerLength * 0.6).toString() + "px";
+        frog3.style.top = (containerLength * 0.6).toString() + "px";
+        frog1.style.visibility = "visible";
+        
+
         const intro2Audio = new Audio('{% static 'frog/audio/intro-2.wav' %}');
         intro2Audio.play().then(() => {
-            setTimeout(auswahl, intro2Audio.duration * 1000)
+            setTimeout(singlePlayerAnimation, 33000);
+            setTimeout(multiPlayerAnimation, 37000);
+            setTimeout(auswahl, intro2Audio.duration * 1000);
+        }).catch(e => {
+            console.log(e.message);
         });
+
+        function singlePlayerAnimation() {
+            frog1.style.transform = `translate(0px, ${-(containerLength * 0.7)}px)`;
+
+            setTimeout(function() {
+                frog1.style.border = "none";
+                frog1.style.transform = "rotate(360deg)";
+                frog1.style.backgroundImage = "url('{% static 'frog/img/coin.png' %}')";
+            }, 2000);
+
+            setTimeout(function() {
+                frog1.style.visibility = "hidden";
+            }, 3000);
+        }
+
+        function multiPlayerAnimation() {
+            pond.style.visibility = "hidden";
+            frog2.style.visibility = "visible";
+            frog3.style.visibility = "visible";
+            pond2.style.visibility = "visible";
+            pond3.style.visibility = "visible";
+            
+            // "Wer von euch beiden dabei mehr Fröschen in den Teich hilft..."
+            setTimeout(function() {
+                frog2.style.transform = `translate(0px, ${-(containerLength * 0.55)}px)`;
+                frog3.style.transform = `translate(0px, ${-(containerLength * 0.35)}px)`;
+            }, 9000);
+
+            // "...bekommt am Ende..."
+            setTimeout(function() {
+                frog2.style.border = "none";
+                frog2.style.transform = "rotate(360deg)";
+                frog2.style.backgroundImage = "url('{% static 'frog/img/coin.png' %}')";
+                frog2.style.visibility = "hidden";
+            }, 12000);
+
+            // "...20 Taler."
+            setTimeout(function() {
+                coinsLeftPlayerWins.style.display = "grid";
+            }, 13000);
+
+            // "Wer verliert bekommt keine Taler."
+            setTimeout(function() {
+                frog2.style.border = "";
+                frog2.style.backgroundImage = "";
+                frog3.style.transform = "rotate(360deg)";
+            }, 17000);
+
+            // "Wenn ihr beide..."
+            setTimeout(function() {
+                coinsLeftPlayerWins.style.display = "none";
+                frog2.style.visibility = "visible";
+            }, 19000);
+
+            // "...gleich gut seid..."
+            setTimeout(function() {
+                frog2.style.transform = `translate(0px, ${-(containerLength * 0.55)}px)`;
+                frog3.style.transform = `translate(0px, ${-(containerLength * 0.55)}px)`;
+            }, 20000);
+
+            // "...bekommt jeder von euch..."
+            setTimeout(function() {
+                frog2.style.border = "none";
+                frog2.style.transform = "rotate(360deg)";
+                frog2.style.backgroundImage = "url('{% static 'frog/img/coin.png' %}')";
+                frog2.style.visibility = "hidden";
+                frog3.style.border = "none";
+                frog3.style.transform = "rotate(360deg)";
+                frog3.style.backgroundImage = "url('{% static 'frog/img/coin.png' %}')";
+                frog3.style.visibility = "hidden";
+            }, 22500);
+
+            // "...b10 Taler."
+            setTimeout(function() {
+                coinsLeftPlayerTie.style.display = "grid";
+                coinsRightPlayerTie.style.display = "grid";
+            }, 23500);
+        }
 
         function auswahl() {
             new Audio('{% static 'frog/audio/Du kannst Dir jetzt aussuchen (Auswahl).mp3' %}').play().then(() => {
+
+                setTimeout(function() {
+                    gridForm.style.display = 'grid';
+                    container.style.display = 'none'
+                }, 25000);
+
                 setTimeout(function() {
                     document.getElementById("single").style.visibility = "visible";
                 }, 26000);

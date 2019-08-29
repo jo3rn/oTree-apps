@@ -1,0 +1,49 @@
+.small_pond {
+    position: absolute;
+    width: 20vmin;
+    height: 10vmin;
+    visibility: hidden;
+    transform: translate(-50%, 0);
+    background-image: url('../img/pond.png');
+    background-size: 100% 100%;
+    background-repeat:no-repeat;
+    background-position: center center;
+}
+
+.small_frog {
+    display: block;
+    position: absolute;
+    width: 6vmin;
+    height: 6vmin;
+    border-radius: 3vmin;
+    border: 1px solid #74BC18;
+    transition: all 1s;
+    visibility: hidden;
+    background-image: url('../img/frog.png');
+    background-size: contain;
+    background-repeat:no-repeat;
+    background-position: center center;
+}
+
+.coinsToWin {
+    position: absolute;
+    display: none;
+    width: 40%;
+    grid-template-columns: repeat(5, 1fr);;
+    bottom: 20%;
+}
+
+#coins_left_player_wins,
+#coins_left_player_tie {
+    left: 5%;
+}
+
+#coins_right_player_tie {
+    right: 5%;
+}
+
+.coinsToWin > .coin {
+    padding: 5px;
+    max-height: 100%;
+    max-width: 100%;
+}

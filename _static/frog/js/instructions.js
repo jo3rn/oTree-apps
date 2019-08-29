@@ -50,6 +50,8 @@ function initializeJs(pathToSplashAudio, pathToQuakAudio, pathToIntro1) {
         setTimeout(jumpLeft, 27300);
         setTimeout(jumpRight, 29400);
         setTimeout(advanceToNextPage, intro1Audio.duration * 1000);
+    }).catch(e => {
+        console.log(e.message);
     });
 }
 

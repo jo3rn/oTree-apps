@@ -38,6 +38,12 @@ class SelectGameMode(Page):
     def is_displayed(self):
         return self.round_number == Constants.num_test_rounds
 
+    def vars_for_template(self):
+        return {
+            'multiplayer_coins_win': range(Constants.multiplayer_coins_win),
+            'multiplayer_coins_tie': range(Constants.multiplayer_coins_tie),
+        }
+
     def before_next_page(self):
         self.participant.vars['game_mode'] = self.player.game_mode
 
