@@ -2,47 +2,70 @@
 {% load otree static %}
 
 {% block styles %}
+    <link href='{% static 'frog/css/pond.css' %}' rel="stylesheet" />
     <link href='{% static "frog/css/choices.css" %}' rel="stylesheet" />
 {% endblock %}
 
 {% block content %}
 
-    <form>
-    <div  class="grid">
-        <div class="others_higher" id="others_higher">
-            <label for="higher">
-              <input name="others_will_score" type="submit" id="higher" value="higher"/>
-              <img class="picturesPerception" src="{% static 'frog/img/others_higher.png' %}">
-            </label>
-        </div>
-
-        <div class="others_lower" id="others_lower">
-            <label for="lower">
-              <input name="others_will_score" type="submit" id="lower" value="lower"/>
-              <img class="picturesPerception" src="{% static 'frog/img/others_lower.png' %}">
-            </label>
-        </div>
+    <div id="container">
+        <div id="pond" class="pond"></div>
+        <div id="frog" class="frog"></div>
     </div>
+
+    <form>
+        <div id="grid_form" class="grid">
+            <div class="others_higher" id="others_higher">
+                <label for="higher">
+                <input name="others_will_score" type="submit" id="higher" value="higher"/>
+                <img class="picturesPerception" src="{% static 'frog/img/others_higher.png' %}">
+                </label>
+            </div>
+
+            <div class="others_lower" id="others_lower">
+                <label for="lower">
+                <input name="others_will_score" type="submit" id="lower" value="lower"/>
+                <img class="picturesPerception" src="{% static 'frog/img/others_lower.png' %}">
+                </label>
+            </div>
+        </div>
     </form>
 
 {% endblock %}
 
 {% block scripts %}
     <script>
+        const gridForm = document.getElementById('grid_form');
+        gridForm.style.display = 'none';
+
+        const container = document.getElementById('container');
+        const containerRect = container.getBoundingClientRect();
+        const containerLength = containerRect.right - containerRect.left;
+        const frog = document.getElementById('frog');
+        frog.style.left = (containerLength - containerLength * 0.575).toString() + "px";
+        frog.style.top = (containerLength * 0.8).toString() + "px";
+        frog.style.visibility = "visible";
+
         const competitionConfAudio = new Audio('{% static 'frog/audio/Du möchtest also gegen (CompetitionConfidence).mp3' %}');
         competitionConfAudio.play().then(() => {
-            setTimeout(showOptions, competitionConfAudio.duration * 1000)
+            setTimeout(showOptions, competitionConfAudio.duration * 1000);
+        }).catch(e => {
+            console.log(e.message);
         });
 
         function showOptions() {
             new Audio('{% static 'frog/audio/wenn du glaubst dass du.mp3' %}').play().then(() => {
-            setTimeout(function() {
+                setTimeout(function() {
+                    gridForm.style.display = 'grid';
+                    container.style.display = 'none';
                     document.getElementById("others_higher").style.visibility = "visible";
                 }, 8000);
 
                 setTimeout(function() {
                     document.getElementById("others_lower").style.visibility = "visible";
-                }, 17000)
+                }, 17000);
+            }).catch(e => {
+                console.log(e.message);
             });
         }
     </script>
