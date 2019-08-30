@@ -8,6 +8,8 @@
 
 {% block content %}
 
+    {% include "StartButtonOverlay.html" %}
+
     <div id="container">
         <div id="pond" class="pond"></div>
         <div id="frog1" class="frog"></div>
@@ -23,6 +25,7 @@
 {% endblock %}
 
 {% block scripts %}
+    <script src="{% static "global/js/startButtonOverlay.js" %}"></script>
     <script src="{% static "frog/js/instructions.js" %}"></script>
     <script>
         window.onload = initialize;

@@ -16,6 +16,7 @@ const containerLength = containerRect.right - containerRect.left;
 
 let splashAudio = new Audio();
 let quakAudio = new Audio();
+let intro1Audio = new Audio();
 
 function initializeJs(pathToSplashAudio, pathToQuakAudio, pathToIntro1) {
     splashAudio = new Audio(pathToSplashAudio);
@@ -43,7 +44,11 @@ function initializeJs(pathToSplashAudio, pathToQuakAudio, pathToIntro1) {
     finger2.style.left = (containerLength - containerLength/3 + containerLength/15).toString() + "px";
     finger1.style.left = (containerLength - containerLength/30).toString() + "px";
 
-    const intro1Audio = new Audio(pathToIntro1);
+    intro1Audio = new Audio(pathToIntro1);
+    playIntro();
+}
+
+const playIntro = () => {
     intro1Audio.play().then(() => {
         setTimeout(jumpFar, 24200);
         setTimeout(jumpABit, 25600);
@@ -51,6 +56,7 @@ function initializeJs(pathToSplashAudio, pathToQuakAudio, pathToIntro1) {
         setTimeout(jumpRight, 29400);
         setTimeout(advanceToNextPage, intro1Audio.duration * 1000);
     }).catch(e => {
+        showStartButtonOverlay(playIntro);
         console.log(e.message);
     });
 }
