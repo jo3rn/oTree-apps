@@ -4,13 +4,16 @@
     height: 100%;
     grid-template-columns: 2fr 1fr 4fr;
     grid-template-rows: repeat(5, 1fr);
-    grid-column-gap: 30px;
-    grid-row-gap: 30px;
+    grid-column-gap: 2.5%;
+    grid-row-gap: 2.5%;
+    align-items: center;
     text-align: center;
 }
 
 .coin_container {
-    border: 5px transparent solid;
+    visibility: hidden;
+    border: 5px gray solid;
+    transition: all 0.5s;
 }
 
 #coin_left_1 {
@@ -43,9 +46,13 @@
 #coin_right_5 {
     grid-area: 5 / 3 / 6 / 4;
 }
-.selector {
+
+#selector {
+    position: relative;
+    height: 100%;
+    align-self: flex-start;
     grid-area: 1 / 2 / 6 / 3;
-}
+} 
 
 .coin {
     max-height: 9vh;
@@ -53,4 +60,39 @@
 
 .selected {
     border: 5px red solid;
+}
+
+.arrow {
+    position: absolute;
+    transition: all 1s linear;
+    max-width: 40%;
+    top: 4%;
+}
+
+#arrow_left {
+    left: 0%;
+}
+
+#arrow_right {
+    right: 0%;
+}
+
+.arrow_1 {
+    top: 4%;
+}
+
+.arrow_2 {
+    top: 24.5%;
+}
+
+.arrow_3 {
+    top: 45%;
+}
+
+.arrow_4 {
+    top: 65.5%;
+}
+
+.arrow_5 {
+    top: 86%;
 }

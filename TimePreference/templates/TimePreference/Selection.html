@@ -50,7 +50,10 @@
             <img class="coin" src='{% static 'global/img/coin.png' %}' />
             <img class="coin" src='{% static 'global/img/coin.png' %}' />
         </div>
-        <div class="selector"></div>
+        <div id="selector">
+            <img class="arrow" id="arrow_left" src='{% static 'timePreference/img/red_arrow_left.png' %}' />
+            <img class="arrow" id="arrow_right" src='{% static 'timePreference/img/red_arrow_right.png' %}' />
+        </div>
     </div>
 
     <input type="hidden" name="choice_scenario_1" id="choice_scenario_1"/>
@@ -70,6 +73,12 @@
         function initialize() {
             initializeJs(
                 '{% static 'timePreference/audio/intro.wav' %}',
+                '{% static 'timePreference/audio/das_spiel.wav' %}',
+                '{% static 'timePreference/audio/du_kannst.wav' %}',
+                '{% static 'timePreference/audio/intro.wav' %}',
+                '{% static 'timePreference/audio/das_spiel.wav' %}',
+                '{% static 'timePreference/audio/du_kannst.wav' %}',
+                {{ chosen_scenario|json }}
             );
         }
 
