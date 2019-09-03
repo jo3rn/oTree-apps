@@ -13,6 +13,7 @@
 .coin_container {
     visibility: hidden;
     border: 5px gray solid;
+    border-radius: 25px;
     transition: all 0.5s;
 }
 
@@ -52,9 +53,11 @@
     height: 100%;
     align-self: flex-start;
     grid-area: 1 / 2 / 6 / 3;
+    visibility: hidden;
 } 
 
 .coin {
+    padding: 3px;
     max-height: 9vh;
 }
 
