@@ -26,4 +26,8 @@ class Group(BaseGroup):
 
 
 class Player(BasePlayer):
-    pass
+    choice_scenario_1 = models.StringField()
+    choice_scenario_2 = models.StringField()
+    choice_scenario_3 = models.StringField()
+    choice_scenario_4 = models.StringField()
+    choice_scenario_5 = models.StringField()

@@ -16,7 +16,7 @@ SESSION_CONFIGS = [
         'name': 'Devils_Task_Frog_Time_Preference',
         'display_name': "Devil's Task, Frog & Time Preference",
         'num_demo_participants': 4,
-        'app_sequence': ['OneByOne', 'AllAtOnce', 'Frog'],
+        'app_sequence': ['OneByOne', 'AllAtOnce', 'Frog', 'TimePreference'],
     },
     {
         'name': 'Devils_Task',

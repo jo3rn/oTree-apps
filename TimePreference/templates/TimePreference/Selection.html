@@ -1,0 +1,77 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block styles %}
+    <link href='{% static 'timePreference/css/selection.css' %}' rel="stylesheet" />
+{% endblock %}
+
+{% block content %}
+
+    {% include "StartButtonOverlay.html" %}
+
+    <div class="coin_grid">
+        <div id="coin_left_1" class="coin_container">
+            <img class="coin" src='{% static 'global/img/coin.png' %}' />
+        </div>
+        <div id="coin_right_1" class="coin_container">
+            <img class="coin" src='{% static 'global/img/coin.png' %}' />
+        </div>
+        <div id="coin_left_2" class="coin_container">
+            <img class="coin" src='{% static 'global/img/coin.png' %}' />
+        </div>
+        <div id="coin_right_2" class="coin_container">
+            <img class="coin" src='{% static 'global/img/coin.png' %}' />
+            <img class="coin" src='{% static 'global/img/coin.png' %}' />
+        </div>
+        <div id="coin_left_3" class="coin_container">
+            <img class="coin" src='{% static 'global/img/coin.png' %}' />
+        </div>
+        <div id="coin_right_3" class="coin_container">
+            <img class="coin" src='{% static 'global/img/coin.png' %}' />
+            <img class="coin" src='{% static 'global/img/coin.png' %}' />
+            <img class="coin" src='{% static 'global/img/coin.png' %}' />
+        </div>
+        <div id="coin_left_4" class="coin_container">
+            <img class="coin" src='{% static 'global/img/coin.png' %}' />
+        </div>
+        <div id="coin_right_4" class="coin_container">
+            <img class="coin" src='{% static 'global/img/coin.png' %}' />
+            <img class="coin" src='{% static 'global/img/coin.png' %}' />
+            <img class="coin" src='{% static 'global/img/coin.png' %}' />
+            <img class="coin" src='{% static 'global/img/coin.png' %}' />
+        </div>
+        <div id="coin_left_5" class="coin_container">
+            <img class="coin" src='{% static 'global/img/coin.png' %}' />
+        </div>
+        <div id="coin_right_5" class="coin_container">
+            <img class="coin" src='{% static 'global/img/coin.png' %}' />
+            <img class="coin" src='{% static 'global/img/coin.png' %}' />
+            <img class="coin" src='{% static 'global/img/coin.png' %}' />
+            <img class="coin" src='{% static 'global/img/coin.png' %}' />
+            <img class="coin" src='{% static 'global/img/coin.png' %}' />
+        </div>
+        <div class="selector"></div>
+    </div>
+
+    <input type="hidden" name="choice_scenario_1" id="choice_scenario_1"/>
+    <input type="hidden" name="choice_scenario_2" id="choice_scenario_2"/>
+    <input type="hidden" name="choice_scenario_3" id="choice_scenario_3"/>
+    <input type="hidden" name="choice_scenario_4" id="choice_scenario_4"/>
+    <input type="hidden" name="choice_scenario_5" id="choice_scenario_5"/>
+
+{% endblock %}
+
+{% block scripts %}
+    <script src="{% static "global/js/startButtonOverlay.js" %}"></script>
+    <script src="{% static "timePreference/js/selection.js" %}"></script>
+    <script>
+        window.onload = initialize;
+
+        function initialize() {
+            initializeJs(
+                '{% static 'timePreference/audio/intro.wav' %}',
+            );
+        }
+
+    </script>
+{% endblock %}
