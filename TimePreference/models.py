@@ -36,3 +36,4 @@ class Player(BasePlayer):
     choice_scenario_3 = models.StringField()
     choice_scenario_4 = models.StringField()
     choice_scenario_5 = models.StringField()
+    chosen_choice = models.StringField()

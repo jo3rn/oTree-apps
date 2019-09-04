@@ -12,7 +12,7 @@
 
 .coin_container {
     visibility: hidden;
-    border: 5px gray solid;
+    border: 5px lightslategrey solid;
     border-radius: 25px;
     transition: all 0.5s;
 }

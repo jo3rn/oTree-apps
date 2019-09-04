@@ -28,13 +28,14 @@ const coinPairs = [
 
 let choices = 0;
 let chosenScenario;
-let audio1 = new Audio();
-let audio2 = new Audio();
-let audio3 = new Audio();
-let audio4 = new Audio();
-let audio5 = new Audio();
-let audio6 = new Audio();
-let audioCoinToday = new Audio();
+let audioIntro = new Audio();
+let audioDasSpiel = new Audio();
+let audioDuKannst = new Audio();
+let audioDieTaler = new Audio();
+let audioDuSpielst = new Audio();
+let audioPassGut = new Audio();
+let audioCoinTodayFirst = new Audio();
+let audioCoinTodayOther = new Audio();
 const objCoinsLater = {
     audioCoinLater1: new Audio(),
     audioCoinLater2: new Audio(),
@@ -43,26 +44,31 @@ const objCoinsLater = {
     audioCoinLater5: new Audio(),
 }
 let audioDecisionByArrow = new Audio();
+let audioReminder = new Audio();
+
+let currentDecision = 1;
 
 
-function initializeJs(pathTo1, pathTo2, pathTo3,
-    pathTo4, pathTo5, pathTo6, pathToCoinToday, pathToCoinLaterOne, 
-    pathToCoinLaterTwo, pathToCoinLaterThree, pathToCoinLaterFour, pathToCoinLaterFive, pathToDecisionByArrow, scenario) {
-    audio1 = new Audio(pathTo1);
-    audio2 = new Audio(pathTo2);
-    audio3 = new Audio(pathTo3);
-    audio4 = new Audio(pathTo4);
-    audio5 = new Audio(pathTo5);
-    audio6 = new Audio(pathTo6);
-    audioCoinToday = new Audio(pathToCoinToday);
+function initializeJs(pathToIntro, pathToDasSpiel, pathToDuKannst,
+    pathToDieTaler, pathToDuSpielst, pathToPassGut, pathToCoinToday, pathToMoechtest, pathToCoinLaterOne, 
+    pathToCoinLaterTwo, pathToCoinLaterThree, pathToCoinLaterFour, pathToCoinLaterFive, pathToDecisionByArrow, pathToReminder, scenario) {
+    audioIntro = new Audio(pathToIntro);
+    audioDasSpiel = new Audio(pathToDasSpiel);
+    audioDuKannst = new Audio(pathToDuKannst);
+    audioDieTaler = new Audio(pathToDieTaler);
+    audioDuSpielst = new Audio(pathToDuSpielst);
+    audioPassGut = new Audio(pathToPassGut);
+    audioCoinTodayFirst = new Audio(pathToCoinToday);
+    audioCoinTodayOther = new Audio(pathToMoechtest);
     objCoinsLater.audioCoinLater1 = new Audio(pathToCoinLaterOne);
     objCoinsLater.audioCoinLater2 = new Audio(pathToCoinLaterTwo);
     objCoinsLater.audioCoinLater3 = new Audio(pathToCoinLaterThree);
     objCoinsLater.audioCoinLater4 = new Audio(pathToCoinLaterFour);
     objCoinsLater.audioCoinLater5 = new Audio(pathToCoinLaterFive);
     audioDecisionByArrow = new Audio(pathToDecisionByArrow);
+    audioReminder = new Audio(pathToReminder);
     chosenScenario = scenario;
-    play1();
+    playIntro();
 }
 
 const letArrowSlide = () => {
@@ -104,76 +110,112 @@ const letArrowSlide = () => {
     setTimeout(() => {
         left_arrow.classList.remove("arrow_1");
         right_arrow.classList.remove("arrow_1");
+        left_arrow.classList.add("arrow_5");
+        right_arrow.classList.add("arrow_5");
+    }, 6000);
+    setTimeout(() => {
+        left_arrow.classList.remove("arrow_5");
+        right_arrow.classList.remove("arrow_5");
         left_arrow.classList.add(`arrow_${chosenScenario}`);
         right_arrow.classList.add(`arrow_${chosenScenario}`);
-    }, 6000);
+    }, 7000);
 }
 
-const play1 = () => {
-    audio1.play().then(() => {
-        setTimeout(play2, audio1.duration * 1000 + audioPause)
+const playIntro = () => {
+    audioIntro.play().then(() => {
+        setTimeout(playDasSpiel, audioIntro.duration * 1000 + audioPause)
     }).catch(e => {
-        showStartButtonOverlay(play1);
+        showStartButtonOverlay(playIntro);
         console.log(e.message);
     });
 }
 
-const play2 = () => {
-    audio2.play().then(() => {
+const playDasSpiel = () => {
+    audioDasSpiel.play().then(() => {
         show(objCoins.left_2);
         show(objCoins.right_2);
-        setTimeout(flash.bind(null, objCoins.left_2), 9500);
-        setTimeout(flash.bind(null, objCoins.right_2), 13500);
-        setTimeout(play3, audio2.duration * 1000 + audioPause)
+        setTimeout(flash.bind(null, objCoins.left_2), 8000);
+        setTimeout(flash.bind(null, objCoins.right_2), 12000);
+        setTimeout(playDuKannst, audioDasSpiel.duration * 1000 + audioPause)
     })
 }
 
-const play3 = () => {
-    audio3.play().then(() => {
-        setTimeout(flash.bind(null, objCoins.left_2), 5000);
-        setTimeout(flash.bind(null, objCoins.right_2), 6200);
-        setTimeout(flash.bind(null, objCoins.left_2), 14000);
-        setTimeout(play4, audio3.duration * 1000 + audioPause)
+const playDuKannst = () => {
+    audioDuKannst.play().then(() => {
+        setTimeout(flash.bind(null, objCoins.left_2), 6500);
+        setTimeout(flash.bind(null, objCoins.right_2), 9000);
+        setTimeout(flash.bind(null, objCoins.left_2), 14200);
+        setTimeout(playDieTaler, audioDuKannst.duration * 1000 + audioPause)
     })
 }
 
-const play4 = () => {
-    audio4.play().then(() => {
-        setTimeout(flash.bind(null, objCoins.right_2), 500);
-        setTimeout(play5, audio4.duration * 1000 + audioPause)
+const playDieTaler = () => {
+    audioDieTaler.play().then(() => {
+        setTimeout(flash.bind(null, objCoins.right_2), 1000);
+        setTimeout(playDuSpielst, audioDieTaler.duration * 1000 + audioPause)
     })
 }
 
-const play5 = () => {
+const playDuSpielst = () => {
     Object.values(objCoins).forEach(coin => {
         show(coin);
     });
-    audio5.play().then(() => {        
-        setTimeout(letArrowSlide, 20000);
-        setTimeout(play6, audio5.duration * 1000 + audioPause)
+    audioDuSpielst.play().then(() => {        
+        setTimeout(flash.bind(null, objCoins.left_1), 11200);
+        setTimeout(flash.bind(null, objCoins.left_2), 11400);
+        setTimeout(flash.bind(null, objCoins.left_3), 11600);
+        setTimeout(flash.bind(null, objCoins.left_4), 11800);
+        setTimeout(flash.bind(null, objCoins.left_5), 12000);
+
+        setTimeout(flash.bind(null, objCoins.right_1), 15000);
+        setTimeout(flash.bind(null, objCoins.right_2), 15200);
+        setTimeout(flash.bind(null, objCoins.right_3), 15400);
+        setTimeout(flash.bind(null, objCoins.right_4), 15600);
+        setTimeout(flash.bind(null, objCoins.right_5), 15800);
+    
+        setTimeout(letArrowSlide, 26000);
+
+        setTimeout(playPassGut, audioDuSpielst.duration * 1000 + audioPause)
     })
 }
 
-const play6 = () => {
+const playPassGut = () => {
     hide(selector);
     Object.values(objCoins).forEach(coin => {
         hide(coin);
     });
-    audio6.play().then(() => {      
-        setTimeout(playCoinDecision.bind(null, 1), audio6.duration * 1000 + audioPause)
+    audioPassGut.play().then(() => {      
+        setTimeout(playCoinDecision.bind(null, 1), audioPassGut.duration * 1000 + audioPause)
     })
 }
 
 const playCoinDecision = (index) => {
+    currentDecision = index;
     show(objCoins[`left_${index}`]);
     show(objCoins[`right_${index}`]);
+
+    let audioCoinToday = new Audio();
+    if (index == 1) {
+        audioCoinToday = audioCoinTodayFirst
+    } else {
+        audioCoinToday = audioCoinTodayOther
+    }
+
     audioCoinToday.play().then(() => {
-        setTimeout(flash.bind(null, objCoins[`left_${index}`]), 1500);
+        if (index == 1) {
+            setTimeout(flash.bind(null, objCoins[`left_${index}`]), 3400);
+        } else {
+            setTimeout(flash.bind(null, objCoins[`left_${index}`]), 1300);
+        }
+        
         setTimeout(
             () => {
                 objCoinsLater[`audioCoinLater${index}`].play().then(() => {
                     setTimeout(flash.bind(null, objCoins[`right_${index}`]), 1000);
                     setTimeout(addCoinClickListener.bind(null, index), objCoinsLater[`audioCoinLater${index}`].duration * 1000);
+                    if (index != 5) {
+                        setTimeout(playReminder.bind(null, index), objCoinsLater[`audioCoinLater${index}`].duration * 1000 + reminderPause);
+                    }   
                 })
             },
             audioCoinToday.duration * 1000 + audioPause)
@@ -183,13 +225,16 @@ const playCoinDecision = (index) => {
 const playDecisionByArrow = () => {
     audioDecisionByArrow.play().then(() => {
         letArrowSlide();
+        setTimeout(advanceToNextPage, audioDecisionByArrow.duration * 1000 + 4000)
     })
 }
 
-const playReminder = () => {
-    audioDecisionByArrow.play().then(() => {
-        setTimeout(playReminder, playReminder.duration * 1000 + reminderPause)
-    })
+const playReminder = (decision) => {
+    if (decision == currentDecision) {
+        audioReminder.play().then(() => {
+            setTimeout(playReminder.bind(null, decision), audioReminder.duration * 1000 + reminderPause)
+        })
+    } 
 }
 
 const registerSelection = (selected, notSelected, index) => {
