@@ -50,9 +50,16 @@ POINTS_CUSTOM_NAME = ''
 
 ROOMS = []
 
-ADMIN_USERNAME = 'admin'
 # for security, best to set admin password in an environment variable
-ADMIN_PASSWORD = environ.get('OTREE_ADMIN_PASSWORD')
+if environ.get('OTREE_ADMIN_USERNAME') not in {None}:
+	ADMIN_USERNAME = environ.get('OTREE_ADMIN_USERNAME')
+else:
+	ADMIN_USERNAME = "admin"
+	
+if environ.get('OTREE_ADMIN_PASSWORD') not in {None}:
+	ADMIN_PASSWORD = environ.get('OTREE_ADMIN_PASSWORD')
+else:
+	ADMIN_PASSWORD = "admin"
 
 DEMO_PAGE_INTRO_HTML = """ """
 
