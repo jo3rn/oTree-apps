@@ -1,14 +1,41 @@
 {% extends "global/Page.html" %}
 {% load otree static %}
 
+{% block styles %}
+<style>
+.frogsContainer {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.frogs {
+  width: 7.5%;
+  margin-right: 2%;
+  padding: 1%;
+  align-self: center;
+}
+
+#payoff {
+    visibility: hidden;
+}
+
+</style>
+{% endblock %}
+
 {% block content %}
 
-    <h1>{{ total }}</h1>
+    <div id="ownFrogs" class="frogsContainer"></div>
+
+    <div id="opponentFrogs" class="frogsContainer"></div>
+
+    <h1 id="payoff">{{ total }} Taler</h1>
 
 {% endblock %}
 
 {% block scripts %}
     <script>
+        const wait_time_before_next_page = 4000;
         const game_mode = {{ game_mode|json }};
 
         let modeAudio = new Audio();
@@ -16,7 +43,7 @@
         if (game_mode == 1) {
             modeAudio = new Audio('{% static 'frog/audio/abschluss-single-player.wav' %}');
         } else if (game_mode == 2) {
-            // modeAudio = new Audio('{% static 'frog/audio/abschluss-competition.wav' %}');
+            modeAudio = new Audio('{% static 'frog/audio/abschluss-competition.wav' %}');
         }
 
         const total = {{ total|json }};
@@ -31,10 +58,54 @@
         }
 
         modeAudio.play().then(() => {
-            setTimeout(function() {
-                audio.play();
-            }, modeAudio.duration * 1000)
+            if (game_mode == 2) {
+                setTimeout(showOwnFrogs, 1000)
+                setTimeout(showOpponentFrogs, 7000)
+                setTimeout(function() {
+                    audio.play().then(() => {
+                        setTimeout(showPayoff, 1000)
+                        setTimeout(advanceToNextPage, audio.duration * 1000 + wait_time_before_next_page)
+                    });
+                    }, modeAudio.duration * 1000)
+            } else {
+                setTimeout(showOwnFrogs, 2000)
+                setTimeout(showPayoff, 6300)
+                setTimeout(advanceToNextPage, modeAudio.duration * 1000 + wait_time_before_next_page)
+            }
         });
+
+        const showOwnFrogs = () => {
+            ownFrogs = {{ own_frogs|json }}
+            ownFrogsContainer = document.getElementById("ownFrogs")
+            ownFrogsContainer.style.backgroundColor = "lightgreen"
+            for (let i = 1; i <= ownFrogs; i++) {
+                const img = document.createElement("img")
+                img.src = '{% static 'frog/img/frog.png' %}'
+                img.classList.add('frogs')
+                ownFrogsContainer.appendChild(img)
+            }
+        }
+
+        const showOpponentFrogs = () => {
+            opponentFrogs = {{ opponent_frogs|json }}
+            opponentFrogsContainer = document.getElementById("opponentFrogs")
+            opponentFrogsContainer.style.backgroundColor = "lightgrey"
+            for (let i = 1; i <= opponentFrogs; i++) {
+                const img = document.createElement("img")
+                img.src = '{% static 'frog/img/frog.png' %}'
+                img.classList.add('frogs')
+                opponentFrogsContainer.appendChild(img)
+            }
+        }
+
+        const showPayoff = () => {
+            payoff = document.getElementById("payoff")
+            payoff.style.visibility = "visible"
+        }
+
+        const advanceToNextPage = () => {
+            document.getElementById("form").submit();
+        }
     </script>
 
 {% endblock %}

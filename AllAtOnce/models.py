@@ -6,7 +6,7 @@ from otree.api import (
 author = 'jo3rn'
 
 doc = """
-A player clicks on as many question marks as he likes. After that he chooses to turn all question marks at once.
+A player clicks on as many question marks as he likes. After that he turns all question marks at once.
 If the other side reveals a coin, it is added to the score. If one question mark reveals the devil he looses the game.
 """
 

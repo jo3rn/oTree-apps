@@ -32,7 +32,7 @@ SESSION_CONFIGS = [
     {
         'name': 'Frog',
         'display_name': 'Frog',
-        'num_demo_participants': 4,
+        'num_demo_participants': 2,
         'app_sequence': ['Frog'],
     },
     {

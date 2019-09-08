@@ -1,9 +1,58 @@
 {% extends "global/Page.html" %}
 {% load otree static %}
 
-{% block content %}
-    Du bekommst {{ time }} {{ coins }} Taler.
+{% block styles %}
+<style>
+.coinsContainer {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
 
+.coins {
+  width: 7.5%;
+  margin-right: 2%;
+  border-bottom: 20px solid white;
+  align-self: center;
+}
+
+</style>
+{% endblock %}
+
+{% block content %}
+    <p>Du bekommst <strong>{{ time }}</strong> {{ coinsThisGame }} Taler.</p>
+    <div id="coinsThisGame" class="coinsContainer"></div>
+
+    {% if coinsOtherGames > 0 %}
+        <p>
+            Aus vorherigen Spielen bekommst du außerdem <strong>heute</strong> {{ coinsOtherGames }} Taler.
+        </p>
+        <div id="coinsOtherGames" class="coinsContainer"></div>
+    {% endif %}
+
+{% endblock %}
+
+{% block scripts %}
+    <script>
+        window.onload = () => {
+            const coinsThisGame = {{ coinsThisGame|json }}
+            const coinsOtherGames = {{ coinsOtherGames|json }}
+
+            for (let i = 1; i <= coinsThisGame; i++) {
+                const img = document.createElement("img");
+                img.src = '{% static 'global/img/coin.png' %}';
+                img.classList.add('coins');
+                document.getElementById("coinsThisGame").appendChild(img);
+            }
+
+            for (let i = 1; i <= coinsOtherGames; i++) {
+                const img = document.createElement("img");
+                img.src = '{% static 'global/img/coin.png' %}';
+                img.classList.add('coins');
+                document.getElementById("coinsOtherGames").appendChild(img);
+            }
+        }
+    </script>
 {% endblock %}
 
 

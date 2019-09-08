@@ -81,16 +81,16 @@ class Results(Page):
         return self.round_number == Constants.num_rounds
 
     def vars_for_template(self):
-
-        opponent_index = self.participant.vars['opponent_index']
-        opponent_id = self.player.get_opponent_id(opponent_index)
-        opponent = self.group.get_player_by_id(opponent_id)
         own_frogs = self.participant.vars['real_frogs']
 
         if self.participant.vars['game_mode'] == 1:
             total = own_frogs
             opponent_frogs = 0
         else:
+            opponent_index = self.participant.vars['opponent_index']
+            opponent_id = self.player.get_opponent_id(opponent_index)
+            opponent = self.group.get_player_by_id(opponent_id)
+            self.player.opponent_id = opponent_id
             opponent_frogs = opponent.participant.vars['real_frogs']
 
             if opponent_frogs > own_frogs:
@@ -99,15 +99,16 @@ class Results(Page):
                 total = 10
             else:
                 total = 20
-
-        self.player.opponent_id = opponent_id
+        
+        
         self.player.final_score = total
+        self.player.payoff = total
 
         return {
-            'own_frogs': self.participant.payoff,
+            'own_frogs': own_frogs,
             'opponent_frogs': opponent_frogs,
             'game_mode': self.participant.vars['game_mode'],
-            'total': total
+            'total': self.player.final_score
         }
 
 

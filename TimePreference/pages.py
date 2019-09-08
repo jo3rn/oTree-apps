@@ -35,8 +35,9 @@ class Results(Page):
             time = "heute"
         
         return dict(
-            coins=coins,
+            coinsThisGame=coins,
             time=time,
+            coinsOtherGames=self.participant.payoff,
         )
 
 
