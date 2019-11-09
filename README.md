@@ -1,6 +1,11 @@
 # oTree apps
 This repository features some games that are executable with oTree. [oTree](http://www.otree.org) is an extension of the Django framework to build web applications tailored for experimental research purposes.
 
+Included apps:
+- [Devil's Task](#devils-task)
+- [Frog](#frog)
+- [Time Preference](#time-preference)
+
 ### Prerequisites
 If you have Python 3 already installed, you only need to run `pip3 install -U otree` in a terminal.
 
@@ -13,10 +18,25 @@ Remark: While this works for a small number of concurrent participants in a loca
 
 # App overview
 
-## DevilsTask
-a game where a player reveals coins or the devil!
+## Devil's Task
+The player is shown 10 mysterious fields that he can uncover by clicking on them. 9 of the 10 fields will reveal a coin, but behind the other remaining field hides the devil (randomly chosen). The goal is to collect as many coins as possible. Before the player can play the game, he gets audio instructed on the rules:
+
+<img src="gif/devil_instructions.gif" width="400" alt="Showcase of the instruction for the Devil's Task game" />
+
+Remark: The start button triggers an interaction with the website to enable audio autoplay (Google Chrome).
+
+The game has two modes. In "one by one" the player gets instant feedback about the other side of the field. With a click on the treasure chest he collects the currently revealed coins. However, if the devil appears, all revealed coins are lost and the next round starts:
+
+<img src="gif/devil_one_by_one.gif" width="400" alt="Showcase of the course of the Devil's Task played in mode 'one by one'" />
+
+In "all at once" (slightly colored background) the player has to decide beforehand how many fields should be revealed. He finalizes his decision by clicking on the magnifying glass:
+
+<img src="gif/devil_all_at_once.gif" width="400" alt="Showcase of the course of the Devil's Task played in mode 'all at once'" />
+
 ## Frog
 a game where a player helps frogs into a pond - optionally against another player
+
+## Time Preference
 
 # Links
 [oTree on GitHub](https://github.com/oTree-org) (for the curious)
