@@ -34,7 +34,28 @@ In "all at once" (slightly colored background) the player has to decide beforeha
 <img src="gif/devil_all_at_once.gif" width="400" alt="Showcase of the course of the Devil's Task played in mode 'all at once'" />
 
 ## Frog
-a game where a player helps frogs into a pond - optionally against another player
+The player helps some frogs jump into a pond - optionally against another player.
+
+At first, the player is instructed on how to let the frog jump. Depending on where on the frog the player clicks/touches, the frog jumps either a short or long distance to the left or the right. The player can then try the controls with 10 test jumps:
+
+<img src="gif/frog_test.gif" width="400" alt="Showcase of the control instructions of the frog game" />
+
+In the game, the player will successively be presented with ten frogs at a random spot on the field. The goal is to let the frog jump into the pond. A successful landing is signaled with a _splash_ noise and a disappearing frog. If the pond is missed, the frog will make a _quak_ noise and jump back. The player can choose one of two game modes:
+1. Single player (zen mode): You play on your own, every frog in the pond results in one earned coin.
+2. Multi player (competitive mode): You play against another player. Your result will be compared to the other player. The matching is randomly, it could also be a single player. If you landed more frogs in the pond than the other player you will receive 20 coins. If there is a tie, you will receive 10 coins. Otherwise you will receive no coins at all.
+
+These rules are displayed to the player upfront:
+
+<img src="gif/frog_coin_switch.gif" width="400" alt="Animation how succesful frogs get converted into coins" />
+
+The player then decides which mode to play by clicking on a field. If he chooses multi player he will also be asked if he thinks the other player will score less or more than him:
+
+<img src="gif/frog_decision.gif" width="400" alt="A player clicks on a field to decide game mode" />
+
+Both single (left) and multi (right) player will be shown how much coins they earned at the end of the game. Additionally, the multi player will be shown how much frogs his opponent landed in the pond:
+
+<img src="gif/frog_single.gif" width="400" alt="Course of a game played in single mode" />
+<img src="gif/frog_multi.gif" width="400" alt="Course of a game played in multi mode" />
 
 ## Time Preference
 
