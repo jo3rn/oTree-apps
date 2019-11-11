@@ -59,6 +59,14 @@ Both single (left) and multi (right) player will be shown how much coins they ea
 
 ## Time Preference
 
+A rather simplistic game: The player must decide between receiving one coin right after the game (left side) or a varying disbursement in one week (right side). There are 5 decisions to make of which one gets chosen at random to determine the payoff. The player is audio instructed on these rules:
+
+<img src="gif/time_preference_instructions.gif" width="400" alt="Instructions of the time preference game" />
+
+Then the player makes his decisions by clicking on the left or right coin(s). Afterwards, the red arrows stop at one decision at random. This will become the payoff (in this case receiving one coin directly after the game):
+
+<img src="gif/time_preference_game.gif" width="400" alt="Course of a time preference game" />
+
 # Links
 [oTree on GitHub](https://github.com/oTree-org) (for the curious)
 
