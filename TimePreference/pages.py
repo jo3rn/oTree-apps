@@ -1,5 +1,4 @@
-from ._builtin import Page, WaitPage
-from .models import Constants
+from ._builtin import Page
 
 
 class Selection(Page):
@@ -13,7 +12,7 @@ class Selection(Page):
         )
 
     def before_next_page(self):
-        chosen_scenario=self.participant.vars['chosen_scenario']
+        chosen_scenario = self.participant.vars['chosen_scenario']
         if chosen_scenario == 1:
             self.player.chosen_choice = self.player.choice_scenario_1
         elif chosen_scenario == 2:
@@ -24,6 +23,8 @@ class Selection(Page):
             self.player.chosen_choice = self.player.choice_scenario_4
         elif chosen_scenario == 5:
             self.player.chosen_choice = self.player.choice_scenario_5
+        else:
+            self.player.chosen_choice = 'no_choice_0'
 
 
 class Results(Page):

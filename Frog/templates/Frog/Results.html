@@ -42,12 +42,14 @@
         const game_mode = {{ game_mode|json }};
         const total = {{ total|json }};
         const mode_audio = {{ mode_audio|json }};
-        const modeAudio = new Audio(`{% static 'frog/audio/${mode_audio}.wav' %}`);
+        const mode_audio_string = `{% static 'frog/audio/${mode_audio}.wav' %}`;
+        const modeAudio = new Audio(mode_audio_string);
 
         const playModeAudio = () => {
             modeAudio.play().then(() => {
                 if (game_mode == 2) {
-                    const audio = new Audio(`{% static 'frog/audio/${total}-taler.wav' %}`);
+                    const audio_string = `{% static 'frog/audio/${total}-taler.wav' %}`;
+                    const audio = new Audio(audio_string);
                     setTimeout(showOwnFrogs, 1000)
                     setTimeout(showOpponentFrogs, 7000)
                     setTimeout(function() {

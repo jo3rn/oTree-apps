@@ -36,6 +36,7 @@ class SelectAll(Page):
 
 class ResultsWaitPage(WaitPage):
     template_name = 'CustomWaitPage.html'
+
     def is_displayed(self):
         return self.round_number == Constants.num_rounds
 
