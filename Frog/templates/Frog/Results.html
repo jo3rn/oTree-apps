@@ -57,6 +57,7 @@
             audio = new Audio('{% static 'frog/audio/10-taler.wav' %}');
         } else if (total == 20) {
             audio = new Audio('{% static 'frog/audio/20-taler.wav' %}');
+        }
 
         const playModeAudio = () => {
             modeAudio.play().then(() => {
