@@ -25,8 +25,8 @@ h2, .otree-title, .page-header {
 .frog {
     display: block;
     position: absolute;
-    width: 12vmin;
-    height: 12vmin;
+    width: 14vmin;
+    height: 14vmin;
     border-radius: 6vmin;
     border: 2px solid #74BC18;
     transition: all 1s;
