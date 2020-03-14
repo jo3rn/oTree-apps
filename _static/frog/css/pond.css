@@ -30,6 +30,7 @@ h2, .otree-title, .page-header {
     border-radius: 6vmin;
     border: 2px solid #74BC18;
     transition: all 1s;
+    transition-timing-function: ease-out;
     visibility: hidden;
     background-image: url('../img/frog.png');
     background-size: contain;
