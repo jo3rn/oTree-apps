@@ -86,12 +86,14 @@ class Results(Page):
         if self.participant.vars['game_mode'] == 1:
             total = own_frogs
             opponent_frogs = 0
+            mode_audio_file_name = 'abschluss-single-player'
         else:
             opponent_index = self.participant.vars['opponent_index']
             opponent_id = self.player.get_opponent_id(opponent_index)
             opponent = self.group.get_player_by_id(opponent_id)
             self.player.opponent_id = opponent_id
             opponent_frogs = opponent.participant.vars['real_frogs']
+            mode_audio_file_name = 'abschluss-competition'
 
             if opponent_frogs > own_frogs:
                 total = 0
@@ -99,8 +101,7 @@ class Results(Page):
                 total = 10
             else:
                 total = 20
-        
-        
+
         self.player.final_score = total
         self.player.payoff = total
 
@@ -108,7 +109,8 @@ class Results(Page):
             'own_frogs': own_frogs,
             'opponent_frogs': opponent_frogs,
             'game_mode': self.participant.vars['game_mode'],
-            'total': self.player.final_score
+            'total': self.player.final_score,
+            'mode_audio': mode_audio_file_name
         }
 
 
