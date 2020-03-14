@@ -8,6 +8,8 @@
 
 {% block content %}
 
+    {% include "StartButtonOverlay.html" %}
+
     <div id="container">
         <div id="pond" class="pond"></div>
         <div id="frog" class="frog"></div>
@@ -34,6 +36,7 @@
 {% endblock %}
 
 {% block scripts %}
+    <script src="{% static "global/js/startButtonOverlay.js" %}"></script>
     <script>
         const gridForm = document.getElementById('grid_form');
         gridForm.style.display = 'none';
@@ -47,11 +50,16 @@
         frog.style.visibility = "visible";
 
         const competitionConfAudio = new Audio('{% static 'frog/audio/Du möchtest also gegen (CompetitionConfidence).mp3' %}');
-        competitionConfAudio.play().then(() => {
-            setTimeout(showOptions, competitionConfAudio.duration * 1000);
-        }).catch(e => {
-            console.log(e.message);
-        });
+        const playCompetitionConf = () => {
+            competitionConfAudio.play().then(() => {
+                setTimeout(showOptions, competitionConfAudio.duration * 1000);
+            }).catch(e => {
+                showStartButtonOverlay(playCompetitionConf);
+                console.log(e.message);
+            });
+        }
+
+        playCompetitionConf();
 
         function showOptions() {
             new Audio('{% static 'frog/audio/wenn du glaubst dass du.mp3' %}').play().then(() => {

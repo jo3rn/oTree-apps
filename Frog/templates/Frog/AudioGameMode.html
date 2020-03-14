@@ -7,6 +7,8 @@
 
 {% block content %}
 
+    {% include "StartButtonOverlay.html" %}
+
     <div id="container">
         <div id="pond" class="pond"></div>
     </div>
@@ -14,6 +16,7 @@
 {% endblock %}
 
 {% block scripts %}
+    <script src="{% static "global/js/startButtonOverlay.js" %}"></script>
     <script>
         const game_mode = {{ game_mode|json }};
 
@@ -24,11 +27,18 @@
             audio = new Audio('{% static 'frog/audio/competition.wav' %}');
         }
 
-        audio.play().then(() => {
-            setTimeout(function() {
-                document.getElementById("form").submit();
-            }, audio.duration * 1000)
-        });
+        const playAudio = () => {
+            audio.play().then(() => {
+                setTimeout(function() {
+                    document.getElementById("form").submit();
+                }, audio.duration * 1000)
+            }).catch(e => {
+                showStartButtonOverlay(playAudio);
+                console.log(e.message);
+            });
+        }
+
+        playAudio();
     </script>
 
 {% endblock %}

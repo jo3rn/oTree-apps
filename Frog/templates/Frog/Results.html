@@ -25,6 +25,8 @@
 
 {% block content %}
 
+    {% include "StartButtonOverlay.html" %}
+
     <div id="ownFrogs" class="frogsContainer"></div>
 
     <div id="opponentFrogs" class="frogsContainer"></div>
@@ -34,45 +36,38 @@
 {% endblock %}
 
 {% block scripts %}
+    <script src="{% static "global/js/startButtonOverlay.js" %}"></script>
     <script>
         const wait_time_before_next_page = 4000;
         const game_mode = {{ game_mode|json }};
-
-        let modeAudio = new Audio();
-
-        if (game_mode == 1) {
-            modeAudio = new Audio('{% static 'frog/audio/abschluss-single-player.wav' %}');
-        } else if (game_mode == 2) {
-            modeAudio = new Audio('{% static 'frog/audio/abschluss-competition.wav' %}');
-        }
-
         const total = {{ total|json }};
-        let audio = new Audio();
+        const mode_audio = {{ mode_audio|json }};
+        const modeAudio = new Audio(`{% static 'frog/audio/${mode_audio}.wav' %}`);
 
-        if (total == 0) {
-            audio = new Audio('{% static 'frog/audio/0-taler.wav' %}');
-        } else if (total == 10) {
-            audio = new Audio('{% static 'frog/audio/10-taler.wav' %}');
-        } else if (total == 20) {
-            audio = new Audio('{% static 'frog/audio/20-taler.wav' %}');
+        const playModeAudio = () => {
+            modeAudio.play().then(() => {
+                if (game_mode == 2) {
+                    const audio = new Audio(`{% static 'frog/audio/${total}-taler.wav' %}`);
+                    setTimeout(showOwnFrogs, 1000)
+                    setTimeout(showOpponentFrogs, 7000)
+                    setTimeout(function() {
+                        audio.play().then(() => {
+                            setTimeout(showPayoff, 1000)
+                            setTimeout(advanceToNextPage, audio.duration * 1000 + wait_time_before_next_page)
+                        });
+                        }, modeAudio.duration * 1000)
+                } else {
+                    setTimeout(showOwnFrogs, 2000)
+                    setTimeout(showPayoff, 6300)
+                    setTimeout(advanceToNextPage, modeAudio.duration * 1000 + wait_time_before_next_page)
+                }
+            }).catch(e => {
+                showStartButtonOverlay(playModeAudio);
+                console.log(e.message);
+            });
         }
 
-        modeAudio.play().then(() => {
-            if (game_mode == 2) {
-                setTimeout(showOwnFrogs, 1000)
-                setTimeout(showOpponentFrogs, 7000)
-                setTimeout(function() {
-                    audio.play().then(() => {
-                        setTimeout(showPayoff, 1000)
-                        setTimeout(advanceToNextPage, audio.duration * 1000 + wait_time_before_next_page)
-                    });
-                    }, modeAudio.duration * 1000)
-            } else {
-                setTimeout(showOwnFrogs, 2000)
-                setTimeout(showPayoff, 6300)
-                setTimeout(advanceToNextPage, modeAudio.duration * 1000 + wait_time_before_next_page)
-            }
-        });
+        playModeAudio();
 
         const showOwnFrogs = () => {
             ownFrogs = {{ own_frogs|json }}
