@@ -9,6 +9,8 @@
 
 {% block content %}
 
+    {% include "StartButtonOverlay.html" %}
+
     <div id="container">
         <div id="pond" class="pond"></div>
         <div id="pond2" class="small_pond"></div>
@@ -56,6 +58,7 @@
 {% endblock %}
 
 {% block scripts %}
+    <script src="{% static "global/js/startButtonOverlay.js" %}"></script>
     <script>
         const container = document.getElementById('container');
         const gridForm = document.getElementById('grid_form');
@@ -89,13 +92,18 @@
         
 
         const intro2Audio = new Audio('{% static 'frog/audio/intro-2.wav' %}');
-        intro2Audio.play().then(() => {
-            setTimeout(singlePlayerAnimation, 33000);
-            setTimeout(multiPlayerAnimation, 37000);
-            setTimeout(auswahl, intro2Audio.duration * 1000);
-        }).catch(e => {
-            console.log(e.message);
-        });
+        const playIntro = () => {
+            intro2Audio.play().then(() => {
+                setTimeout(singlePlayerAnimation, 33000);
+                setTimeout(multiPlayerAnimation, 37000);
+                setTimeout(auswahl, intro2Audio.duration * 1000);
+            }).catch(e => {
+                showStartButtonOverlay(playIntro);
+                console.log(e.message);
+            });
+        }
+        
+        playIntro();
 
         function singlePlayerAnimation() {
             frog1.style.transform = `translate(0px, ${-(containerLength * 0.7)}px)`;
