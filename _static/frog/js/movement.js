@@ -44,7 +44,7 @@ const randomizeFrogPosition = () => {
     frog.style.left = randomX.toString() + "px";
     frog.style.top = randomY.toString() + "px";
     frog.style.visibility = "visible";
-}
+};
 
 const initializeJs = (pathToSplashAudio, pathToQuakAudio, pathToReminderAudio) => {
     splashAudio = new Audio(pathToSplashAudio);
@@ -52,7 +52,7 @@ const initializeJs = (pathToSplashAudio, pathToQuakAudio, pathToReminderAudio) =
     reminderAudio = new Audio(pathToReminderAudio);
     randomizeFrogPosition();
     setTimeout(playReminder, 20000);
-}
+};
 
 const getClickPosition = (e) => {
     frog.removeEventListener('click', getClickPosition);
@@ -89,18 +89,15 @@ const getClickPosition = (e) => {
     const movementToRight = Math.floor(percentageToLeft * containerLength);
     const movementToBottom = Math.floor(percentageToTop * containerLength);
 
-    console.log(`movementToRight: ${movementToRight}`)
-    console.log(`movementToBottom: ${movementToBottom}`)
-
     // lets the frog jump
     moveFrogNew(movementToRight, movementToBottom)
-}
+};
 
 const moveFrogNew = (right, bottom) => {
     frog.style.left = (frog.offsetLeft + right) + "px";
     frog.style.top = (frog.offsetTop + bottom) + "px";
     setTimeout(proceedAfterMovement, 1400);
-}
+};
 
 const proceedAfterMovement = () => {
     if (isFrogInPond()) {
@@ -108,7 +105,7 @@ const proceedAfterMovement = () => {
     } else {
         frogMissed();
     }
-}
+};
 
 const isFrogInPond = () => {
     // coordinates of settled frog box
@@ -117,9 +114,6 @@ const isFrogInPond = () => {
     const frogRight = frogRect.right;
     const frogTop = frogRect.top;
     const frogBottom = frogRect.bottom;
-
-    console.log(`frogRight: ${frogRight}`)
-    console.log(`frogBottom: ${frogBottom}`)
 
     // coordinates of settled frog center
     const frogCenterX = (frogRight + frogLeft) / 2;
@@ -134,7 +128,7 @@ const isFrogInPond = () => {
     } else {
         return true;
     }
-}
+};
 
 const frogMissed = () => {
     if (!isFirstTry || hasFrogJumpedOutOfWindow()) {
@@ -153,29 +147,29 @@ const hasFrogJumpedOutOfWindow = () => {
     const windowHeight = window.innerHeight;
     const frogRect = frog.getBoundingClientRect();
     return frogRect.top < -1 || frogRect.left < -1 || frogRect.right > windowWidth || frogRect.bottom > windowHeight;
-}
+};
 
 const frogSucceeded = () => {
     frogInPond.value = 1;
     animateFrogSuccess();
     setTimeout(advanceToNextPage, 1500);
-}
+};
 
 const animateFrogSecondTry = () => {
     frog.style.borderColor = 'blue';
-}
+};
 
 const animateFrogFail = () => {
     quakAudio.play();
     frog.style.backgroundColor = "#94CC00";
     frog.style.transform = "rotate(360deg)";
     frog.style.opacity = "0";
-}
+};
 
 const animateFrogSuccess = () => {
     splashAudio.play();
     frog.style.opacity = "0";
-}
+};
 
 const playReminder = () => {
     if (noInteraction) {
@@ -186,10 +180,10 @@ const playReminder = () => {
             setTimeout(playReminder, 20000);
         }); 
     }
-}
+};
 
 const advanceToNextPage = () => {
   document.getElementById("form").submit();
-}
+};
 
 frog.addEventListener('click', getClickPosition, false);
