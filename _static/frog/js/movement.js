@@ -18,9 +18,11 @@ const pondBottom = pondRect.bottom;
 let splashAudio = new Audio();
 let quakAudio = new Audio();
 let reminderAudio = new Audio();
+let reminderSecondTryAudio = new Audio();
 
 let noInteraction = true;
 let isFirstTry = true;
+let needSecondTryReminder = false;
 
 // difficulty: how far can the center of the frog be outside of the pond box (absolute value)
 // 0 means frog center needs to be within the pond box
@@ -46,10 +48,11 @@ const randomizeFrogPosition = () => {
     frog.style.visibility = "visible";
 };
 
-const initializeJs = (pathToSplashAudio, pathToQuakAudio, pathToReminderAudio) => {
+const initializeJs = (pathToSplashAudio, pathToQuakAudio, pathToReminderAudio, pathToReminderSecondTryAudio) => {
     splashAudio = new Audio(pathToSplashAudio);
     quakAudio = new Audio(pathToQuakAudio);
     reminderAudio = new Audio(pathToReminderAudio);
+    reminderSecondTryAudio = new Audio(pathToReminderSecondTryAudio);
     randomizeFrogPosition();
     setTimeout(playReminder, 20000);
 };
@@ -57,6 +60,7 @@ const initializeJs = (pathToSplashAudio, pathToQuakAudio, pathToReminderAudio) =
 const getClickPosition = (e) => {
     frog.removeEventListener('click', getClickPosition);
     noInteraction = false;
+    needSecondTryReminder = !needSecondTryReminder;
 
     // coordinates of click position on frog
     const clickX = e.clientX;
@@ -120,14 +124,10 @@ const isFrogInPond = () => {
     const frogCenterY = (frogBottom + frogTop) / 2;
 
     // check whether frog center is within acceptable box
-    if (frogCenterX <= pondLeft + difficulty ||
-        frogCenterY >= pondBottom - difficulty ||
+    return !(frogCenterX <= pondLeft + difficulty ||
         frogCenterX >= pondRight - difficulty ||
-        frogCenterY <= pondTop + difficulty) {
-        return false;
-    } else {
-        return true;
-    }
+        frogCenterY >= pondBottom - difficulty ||
+        frogCenterY <= pondTop + difficulty);
 };
 
 const frogMissed = () => {
@@ -138,9 +138,10 @@ const frogMissed = () => {
     } else {
         frog.addEventListener('click', getClickPosition);
         animateFrogSecondTry();
+        setTimeout(playReminderSecondTry, 3500);
         isFirstTry = false;
     }
-}
+};
 
 const hasFrogJumpedOutOfWindow = () => {
     const windowWidth = window.innerWidth;
@@ -179,6 +180,17 @@ const playReminder = () => {
             console.log(e.message);
             setTimeout(playReminder, 20000);
         }); 
+    }
+};
+
+const playReminderSecondTry = () => {
+    if (needSecondTryReminder) {
+        reminderSecondTryAudio.play().then(() => {
+            setTimeout(playReminderSecondTry, 3000)
+        }).catch(e => {
+            console.log(e);
+            setTimeout(playReminderSecondTry, 3000)
+        })
     }
 };
 
